@@ -1702,10 +1702,10 @@ spawn(function()
             pcall(function()
                 local Lv = game:GetService("Players").LocalPlayer.Data.Level.Value
                 CheckLevel()
-                if Lv <= 150 then
-                    autofarm()
-                elseif Lv == 150 or Lv >= 150 then
+                if AutoQuestFarm then
                     autofarm2()
+                else
+                    autofarm()
                 end
             end)
         end
@@ -1726,20 +1726,24 @@ function autofarm()
             for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                 if v.Name == Ms and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                     repeat game:GetService("RunService").Heartbeat:wait()
-                        if game:GetService("Workspace").Enemies:GetChildren(Ms) then
+                        if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                             EquipWeapon(SelectToolWeapon)
                             v.HumanoidRootPart.CanCollide = false
                             v.Head.CanCollide = false
                             cframemon = v.HumanoidRootPart.CFrame
                             Magnet = true
-                            Fast_Delay = true
+                            if Fast_Delay_Click_Custom then
+                                Fast_Delay = true
+                            else
+                                Fast_Delay = false
+                            end
                             TP(cframemon * CFrame.new(0,45,0))
                         end
                     until Auto_Farm == false or not v.Parent or v.Humanoid.Health <= 0 or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or not game:GetService("Workspace").Enemies:GetChildren(v.Name)
                 end
             end
         else
-            TP(CFrameMon)
+            TP(CFrameMon * CFrame.new(0,45,0))
             CheckLevel()
             Fast_Delay = false
             Magnet = false
@@ -1767,7 +1771,7 @@ function autofarm2()
                 for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                     if v.Name == Ms and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                         repeat game:GetService("RunService").Heartbeat:wait()
-                            if game:GetService("Workspace").Enemies:GetChildren(Ms) then
+                            if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                                 if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
                                     EquipWeapon(SelectToolWeapon)
                                     v.HumanoidRootPart.CanCollide = false
@@ -1775,7 +1779,11 @@ function autofarm2()
                                     v.Head.CanCollide = false
                                     TP2(cframemon * CFrame.new(0,45,0))
                                     Magnet = true
-                                    Fast_Delay = true
+                                    if Fast_Delay_Click_Custom then
+                                        Fast_Delay = true
+                                    else
+                                        Fast_Delay = false
+                                    end
                                 else
                                     Magnet = false    
                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
@@ -1791,7 +1799,7 @@ function autofarm2()
                 end
             else
                 CheckLevel()
-                TP(CFrameMon * CFrame_x)
+                TP(CFrameMon * CFrame.new(0,45,0))
                 Fast_Delay = false
                 Magnet = false
             end
@@ -1807,7 +1815,7 @@ spawn(function()
             for _,v in pairs(game.Workspace.Enemies:GetChildren()) do
                 if autofarmV1 or AutoFarmSelectMon and Magnet then
                     if v.Name == Ms and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                        if (v.HumanoidRootPart.Position - cframemon.Position).Magnitude <= 285 then
+                        if (v.HumanoidRootPart.Position - cframemon.Position).Magnitude <= 275 then
                             pcall(function()
                                 v.Head.CanCollide = false
                                 v.HumanoidRootPart.CanCollide = false
@@ -1827,7 +1835,7 @@ end)
 
 spawn(function()
     while wait(1) do
-        if AutoHaki then
+        if AutoHaki or Haki_Toggle then
             if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
             end
@@ -2007,6 +2015,20 @@ tap1:AddToggle("Auto Kaiton", false, function(v)
         TP2(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
         TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
     end
+    wait(.1)
+    if v == true then
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Notification System", 
+            Text = "Auto Kaiton: ✅",
+            Duration = 10
+        })
+    else
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Notification System", 
+            Text = "Auto Kaiton: ❌",
+            Duration = 10
+        })
+    end
 end)
 
 tap1:AddToggle("Auto Farm Level", false, function(v)
@@ -2019,69 +2041,49 @@ tap1:AddToggle("Auto Farm Level", false, function(v)
         TP2(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
         TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
     end
+    wait(.1)
+    if v == true then
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Notification System", 
+            Text = "Auto Farm Level: ✅",
+            Duration = 10
+        })
+    else
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Notification System", 
+            Text = "Auto Farm Level: ❌",
+            Duration = 10
+        })
+    end
 end)
 
 spawn(function()
     while wait(.1) do
         if AutoFarmSelectMon then
             CheckLevel()
-            autofarmselectmon()
+            if AutoQuestFarm then
+                autofarmselectmon1()
+            else
+                autofarmselectmon2()
+            end
         end
     end
 end)
 
-function autofarmselectmon()
+function autofarmselectmon1()
     CheckLevel()
-    local a = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible
-    if AutoQuestFarm == true then
+    if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
         if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-            if a == false then
-                TP(CFrameQ)
-                CheckLevel()
-                if (CFrameQ.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
-                    wait(1.1)
-                    if (CFrameQ.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 30 then
-                        local CommF_ = game:GetService("ReplicatedStorage").Remotes["CommF_"];CommF_:InvokeServer("StartQuest", NameQuest, QuestLv)
-                    end
+            TP(CFrameQ)
+            CheckLevel()
+            if (CFrameQ.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
+                wait(1.1)
+                if (CFrameQ.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 30 then
+                    local CommF_ = game:GetService("ReplicatedStorage").Remotes["CommF_"];CommF_:InvokeServer("StartQuest", NameQuest, QuestLv)
                 end
-            elseif a == true then
-                pcall(function()
-                    if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
-                        for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v.Name == Ms and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                repeat game:GetService("RunService").Heartbeat:wait()
-                                    if game:GetService("Workspace").Enemies:GetChildren(Ms) then
-                                        if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
-                                            EquipWeapon(SelectToolWeapon)
-                                            v.HumanoidRootPart.CanCollide = false
-                                            cframemon = v.HumanoidRootPart.CFrame
-                                            v.Head.CanCollide = false
-                                            TP2(cframemon * CFrame.new(0,45,0))
-                                            Magnet = true
-                                            Fast_Delay = true
-                                        else
-                                            Magnet = false    
-                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                                        end
-                                    else
-                                        CheckLevel()
-                                        TP(CFrameMon)
-                                        Fast_Delay = false
-                                        Magnet = false
-                                    end
-                                until not v.Parent or v.Humanoid.Health <= 0 or AutoFarmSelectMon == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or not game:GetService("Workspace").Enemies:GetChildren(v.Name)
-                            end
-                        end
-                    else
-                        CheckLevel()
-                        TP(CFrameMon * CFrame_x)
-                        Fast_Delay = false
-                        Magnet = false
-                    end
-                end)
             end
         end
-    elseif AutoQuestFarm == false then
+   elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
         pcall(function()
             if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                 for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
@@ -2119,8 +2121,42 @@ function autofarmselectmon()
     end
 end
 
+function autofarmselectmon2()
+    CheckLevel()
+    pcall(function()
+        if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
+            for _,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                if v.Name == Ms and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                    repeat game:GetService("RunService").Heartbeat:wait()
+                        if game:GetService("Workspace").Enemies:GetChildren(Ms) then
+                            EquipWeapon(SelectToolWeapon)
+                            v.HumanoidRootPart.CanCollide = false
+                            cframemon = v.HumanoidRootPart.CFrame
+                            v.Head.CanCollide = false
+                            TP2(cframemon * CFrame.new(0,45,0))
+                            Magnet = true
+                            Fast_Delay = true
+                        else
+                            CheckLevel()
+                            TP(CFrameMon)
+                            Fast_Delay = false
+                            Magnet = false
+                        end
+                    until not v.Parent or v.Humanoid.Health <= 0 or AutoFarmSelectMon == false
+                end
+            end
+        else
+            CheckLevel()
+            TP(CFrameMon)
+            Fast_Delay = false
+            Magnet = false
+        end
+    end)
+end
+
 if OldWorld then
     SelectMonFarm = {
+        "NIL",
         "Bandit [Lv. 5]",
         "Monkey [Lv. 14]",
         "Gorilla [Lv. 20]",
@@ -2148,6 +2184,7 @@ if OldWorld then
     }
 elseif NewWorld then
     SelectMonFarm = {
+        "NIL",
         "Raider [Lv. 700]",
         "Mercenary [Lv. 725]",
         "Swan Pirate [Lv. 775]",
@@ -2173,6 +2210,7 @@ elseif NewWorld then
     }
 elseif ThreeWorld then
     SelectMonFarm = {
+        "NIL",
         "Pirate Millionaire [Lv. 1500]",
         "Pistol Billionaire [Lv. 1525]" ,
         "Dragon Crew Warrior [Lv. 1575]",
@@ -2208,19 +2246,67 @@ end
 
 tap1:AddToggle("Auto Farm ( Select )", false, function(v)
     AutoFarmSelectMon = v
+    AutoHaki = v
+    Fast_Delay = v
+    if v == false then
+        wait(.1)
+        game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible = false
+        TP2(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+        TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+    end
+    wait(.1)
+    if v == true then
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Notification System", 
+            Text = "Auto Farm ( Select ): ✅",
+            Duration = 10
+        })
+    else
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Notification System", 
+            Text = "Auto Farm ( Select ): ❌",
+            Duration = 10
+        })
+    end
 end)
 
-tap1:AddToggle("Auto Quest ( Select )", false, function(v)
+tap1:AddToggle("Auto Quest", true, function(v)
     AutoQuestFarm = v
+    wait(.1)
+    if v == true then
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Notification System", 
+            Text = "Auto Quest: ✅",
+            Duration = 10
+        })
+    else
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Notification System", 
+            Text = "Auto Quest: ❌",
+            Duration = 10
+        })
+    end
 end)
 
 tap1:AddDropdown("Select Mob ( Farm )", SelectMonFarm, function(v)
     SelectMonster = v
+    wait(.1)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Select Mob Farm: ".. tostring(v) .."✅",
+        Duration = 10
+    })
 end)
-
-local DropWeaponMain = tap1:AddDropdown("Weapon", Weapon, function(x)
-    SelectToolWeapon = x
-    SelectToolWeaponOld = x
+--9dc8ddf7ec8aff9c5edf5299f8f7af4b
+local DropWeaponMain = tap1:AddDropdown("Weapon", Weapon, function(v)
+    SelectToolWeapon = v
+    SelectToolWeaponOld = v
+    wait(.1)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Select Weapon: ".. tostring(v) .. "✅",
+        Duration = 10
+    })
 end)
 
 tap1:AddButton("Refresh Weapon", function()
@@ -2243,7 +2329,7 @@ tap1:AddSeperator("Setting Farm")
 
 spawn(function()
     pcall(function()
-        while wait() do
+        while wait(.1) do
             if AutoSetSpawn then
                 if game:GetService("Players").LocalPlayer.Character.Humanoid.Health > 0 then
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
@@ -2254,7 +2340,7 @@ spawn(function()
 end)
 
 local plr = game.Players.LocalPlayer
-local CbFw = getupvalues(require(plr.PlayerScripts.CombatFramework))
+local CbFw = debug.getupvalues(require(game.Players.LocalPlayer.PlayerScripts.CombatFramework))
 local CbFw2 = CbFw[2]
 
 function GetCurrentBlade() 
@@ -2265,67 +2351,84 @@ function GetCurrentBlade()
     return ret
 end
 
-function AttackNoCD()
-    local AC = CbFw2.activeController
-    for i = 1,1 do wait()
-        local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
-            plr.Character,
-            {plr.Character.HumanoidRootPart},
-            60
-        )
-        local cac = {}
-        local hash = {}
-        for k, v in pairs(bladehit) do
-            if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
-                table.insert(cac, v.Parent.HumanoidRootPart)
-                hash[v.Parent] = true
+function AttackNoCD(Num)
+    if Num == 1 then
+        local AC = CbFw2.activeController
+        for i = 1,1 do 
+            local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
+                plr.Character,
+                {plr.Character.HumanoidRootPart},
+                60
+            )
+            local cac = {}
+            local hash = {}
+            for k, v in pairs(bladehit) do
+                if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
+                    table.insert(cac, v.Parent.HumanoidRootPart)
+                    hash[v.Parent] = true
+                end
+            end
+            bladehit = cac
+            if #bladehit > 0 then
+                local u8 = debug.getupvalue(AC.attack, 5)
+                local u9 = debug.getupvalue(AC.attack, 6)
+                local u7 = debug.getupvalue(AC.attack, 4)
+                local u10 = debug.getupvalue(AC.attack, 7)
+                local u12 = (u8 * 798405 + u7 * 727595) % u9
+                local u13 = u7 * 798405
+                (function()
+                    u12 = (u12 * u9 + u13) % 1099511627776
+                    u8 = math.floor(u12 / u9)
+                    u7 = u12 - u8 * u9
+                end)()
+                u10 = u10 + 1
+                debug.setupvalue(AC.attack, 5, u8)
+                debug.setupvalue(AC.attack, 6, u9)
+                debug.setupvalue(AC.attack, 4, u7)
+                debug.setupvalue(AC.attack, 7, u10)
+                pcall(function()
+                    if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
+                        AC.animator.anims.basic[1]:Play(0.01,0.01,0.01)
+                        game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
+                        game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
+                        game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
+                    end
+                end)
             end
         end
-        bladehit = cac
-        if #bladehit > 0 then
-            local u8 = debug.getupvalue(AC.attack, 5)
-            local u9 = debug.getupvalue(AC.attack, 6)
-            local u7 = debug.getupvalue(AC.attack, 4)
-            local u10 = debug.getupvalue(AC.attack, 7)
-            local u12 = (u8 * 798405 + u7 * 727595) % u9
-            local u13 = u7 * 798405
-            (function()
-                u12 = (u12 * u9 + u13) % 1099511627776
-                u8 = math.floor(u12 / u9)
-                u7 = u12 - u8 * u9
-            end)()
-            u10 = u10 + 1
-            debug.setupvalue(AC.attack, 5, u8)
-            debug.setupvalue(AC.attack, 6, u9)
-            debug.setupvalue(AC.attack, 4, u7)
-            debug.setupvalue(AC.attack, 7, u10)
+    elseif Num == 0 then
+        for i,CombatFrameworkR in pairs(CbFw2) do
             pcall(function()
-                if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
-                    AC.animator.anims.basic[1]:Play(0.01,0.01,0.01)
-                    game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
-                    game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
-                    game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
-                end
+                CombatFrameworkR.activeController.attacking = false
+                CombatFrameworkR.activeController.blocking = false
+                CombatFrameworkR.activeController.humanoid.AutoRotate = true
+                CombatFrameworkR.activeController.focusStart = 1
+                CombatFrameworkR.activeController.increment = 4
+                CombatFrameworkR.activeController.hitboxMagnitude = 55
+                CombatFrameworkR.activeController.timeToNextBlock = tick() -1
+                CombatFrameworkR.activeController.timeToNextAttack = tick() -1
             end)
         end
     end
 end
 
 spawn(function()
-    while wait(wat1) do 
+    while true do wait(wat1)
         pcall(function()
-            if Fast_Delay_Click_Custom1 == false and Fast_Delay_Click_Custom and Fast_Delay == false then
-                AttackNoCD()
+            if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and Fast_Delay_Click_Custom and Fast_Delay == false then
+                AttackNoCD(1)
             end
         end)
     end
 end)
 
 spawn(function()
-    while wait(wat2) do 
+    while true do wait(wat2)
         pcall(function()
-            if Fast_Delay and Fast_Delay_Click_Custom1 == false and Fast_Delay_Click_Custom == true then
-                AttackNoCD()
+            if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and Fast_Delay then
+                AttackNoCD(1)
+            elseif game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and Fast_Delay_Click_Custom == false and Fast_Delay == false then
+                AttackNoCD(0)
             end
         end)
     end
@@ -2350,6 +2453,20 @@ end)
 
 tap1:AddToggle("Set Spawn Home", true, function(v)
     AutoSetSpawn = v
+    wait(.1)
+    if AutoSetSpawn == true then
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Notification System", 
+            Text = "Auto Set Spawn: ✅",
+            Duration = 10
+        })
+    else
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Notification System", 
+            Text = "Auto Set Spawn: ❌",
+            Duration = 10
+        })
+    end
 end)
 
 spawn(function()
@@ -2378,22 +2495,49 @@ PoFast = {
 
 tap1:AddDropdown("Fastattack Deley", PoFast, function(v)
     Fast_Time = v
+    wait(.1)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Select Fast Deley: " .. tostring(Fast_Time) .. "✅",
+        Duration = 10
+    })
 end)
 
 Fast_Delay_Click_Custom = true
 tap1:AddToggle("Fast Attack", true, function(v)
     Fast_Delay_Click_Custom = v
-
-    if v == true then
-        Fast_Delay_Click_Custom1 = false
+    wait(.1)
+    if Fast_Delay_Click_Custom == true then
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Notification System", 
+            Text = "Fast Attack: ✅",
+            Duration = 10
+        })
     else
-        Fast_Delay_Click_Custom1 = true
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Notification System", 
+            Text = "Fast Attack: ❌",
+            Duration = 10
+        })
     end
-
 end)
 
 tap1:AddToggle("Auto Rejoin", true, function(v)
     Auto_Join_From_Kick = v
+    wait(.1)
+    if v == true then
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Notification System", 
+            Text = "Auto Rejoin: ✅",
+            Duration = 10
+        })
+    else
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Notification System", 
+            Text = "Auto Rejoin: ❌",
+            Duration = 10
+        })
+    end
 end)
 
 local tap2 = Library:AddTab("Move Farm")
@@ -2401,22 +2545,38 @@ local tap2 = Library:AddTab("Move Farm")
 tap2:AddSeperator("Farm Boss")
 
 tap2:AddToggle("Auto Farm Boss", false, function()
-    print("Coming Soon")
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Coming Soon",
+        Duration = 25
+    })
 end)
 
 Boss = {} 
 local DropCheckBoss = tap2:AddDropdown("Boss", Boss, function()
-
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Coming Soon",
+        Duration = 25
+    })
 end)
 
 tap2:AddSeperator("Auto Function ( Muitl )")
 
 tap2:AddToggle("Auto ThirdWorld", false, function()
-    print("Coming Soon")
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Coming Soon",
+        Duration = 25
+    })
 end)
 
 tap2:AddToggle("Auto NewWorld", false, function()
-    print("Coming Soon")
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Coming Soon",
+        Duration = 25
+    })
 end)
 
 local tap3 = Library:AddTab("Stats")
@@ -2454,10 +2614,19 @@ local tap4 = Library:AddTab("Teleports")
 tap4:AddSeperator("Teleports")
 
 tap4:AddDropdown("Select ", {'Coming Soon'}, function()
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Coming Soon",
+        Duration = 25
+    })
 end)
 
 tap4:AddToggle("On / Off", false, function()
-    print('Coming Soon')
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Coming Soon",
+        Duration = 25
+    })
 end)
 
 local tap5 = Library:AddTab("Dungeon")
@@ -2465,104 +2634,234 @@ local tap5 = Library:AddTab("Dungeon")
 tap5:AddSeperator("Raid")
 
 tap5:AddDropdown("Select Raid", {'Soon'}, function()
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Coming Soon",
+        Duration = 25
+    })
 end)
 
 
 tap5:AddToggle("Kill Aura", false, function()
-    print("Soon")
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Coming Soon",
+        Duration = 25
+    })
 end)
 
 tap5:AddToggle("Auto Buy Raid", false, function()
-    print("Soon")
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Coming Soon",
+        Duration = 25
+    })
 end)
 
 tap5:AddSeperator("Awake Fruit")
 
 tap5:AddDropdown("Select Fruits", {}, function()
-    print('Soon')
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Coming Soon",
+        Duration = 25
+    })
 end)
 
 tap5:AddToggle("Auto Awake Fruits", false, function()
-    print('Soon')
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Coming Soon",
+        Duration = 25
+    })
 end)
-
 
 local tap6 = Library:AddTab("Item & Buy")
 
 tap6:AddSeperator("Fighting Styles V.1")
 
 tap6:AddButton("Dark Step",function()
-
+    local args = {
+        [1] = "BuyBlackLeg"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 end)
 
 tap6:AddButton("Electric",function()
-
+    local args = {
+        [1] = "BuyElectro"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 end)
 
 tap6:AddButton("Water Kung Fu",function()
-
+    local args = {
+        [1] = "BuyFishmanKarate"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 end)
 
-tap6:AddButton("Dragon Breath",function()
-
+tap6:AddButton("Dragon Claw",function()
+    local args = {
+        [1] = "BlackbeardReward",
+        [2] = "DragonClaw",
+        [3] = "1"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    local args = {
+        [1] = "BlackbeardReward",
+        [2] = "DragonClaw",
+        [3] = "2"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 end)
 
 tap6:AddSeperator("Fighting Styles V.2")
 
 tap6:AddButton("Death Step",function()
+    local args = {
+        [1] = "BuyDeathStep"
+    }
 
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 end)
 
 tap6:AddButton("Electric Claw",function()
-
+    local args = {
+        [1] = "BuyElectricClaw"
+        }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 end)
 
 tap6:AddButton("Sharkman Karate",function()
+    local args = {
+        [1] = "BuySharkmanKarate"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
 
+tap6:AddButton("Dragon Breath",function()
+    local args = {
+        [1] = "BuyDragonTalon"
+        }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 end)
 
 tap6:AddSeperator("Fighting Styles Misc")
 
 tap6:AddButton("Superhuman",function()
-
+    local args = {
+        [1] = "BuySuperhuman"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 end)
 
 tap6:AddButton("Godhuman",function()
-
+    local args = {
+        [1] = "BuyGodhuman"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 end)
 
 local tap8 = Library:AddTab("Misc")
 
 tap8:AddSeperator("Misc")
 
-tap8:AddToggle("Nocilp", false, function()
+game:GetService("RunService").Stepped:Connect(function()
+    if NoClip_Toggle then
+        for _, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+            if v:IsA("BasePart") then
+                v.CanCollide = false    
+            end
+        end
+    end
+end)
 
+tap8:AddToggle("Auto Haki", true, function(v)
+    Haki_Toggle = v
+end)
+
+tap8:AddToggle("Nocilp", false, function(v)
+    NoClip_Toggle = v
 end)
 
 tap8:AddButton("Hop Server",function()
-
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Coming Soon",
+        Duration = 25
+    })
 end)
 
 tap8:AddButton("Rejoin",function()
-
+    local L_1 = game.PlaceId
+    game:GetService('TeleportService'):Teleport(L_1)
 end)
 
 tap8:AddButton("Fps Boost",function()
-
+	local decalsyeeted = true
+    local g = game
+    local w = g.Workspace
+    local l = g.Lighting
+    local t = w.Terrain
+    t.WaterWaveSize = 0
+    t.WaterWaveSpeed = 0
+    t.WaterReflectance = 0
+    t.WaterTransparency = 0
+    l.GlobalShadows = false
+    l.FogEnd = 9e9
+    l.Brightness = 0
+    settings().Rendering.QualityLevel = "Level01"
+    for i, v in pairs(g:GetDescendants()) do
+        if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then 
+            v.Material = "Plastic"
+            v.Reflectance = 0
+        elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
+            v.Transparency = 1
+        elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+            v.Lifetime = NumberRange.new(0)
+        elseif v:IsA("Explosion") then
+            v.BlastPressure = 1
+            v.BlastRadius = 1
+        elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+            v.Enabled = false
+        elseif v:IsA("MeshPart") then
+            v.Material = "Plastic"
+            v.Reflectance = 0
+            v.TextureID = 10385902758728957
+        end
+    end
+    for i, e in pairs(l:GetChildren()) do
+        if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
+            e.Enabled = false
+        end
+    end
 end)
 
 tap8:AddLine("Line")
 
 tap8:AddButton("Open Fruit Shop",function()
-
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Coming Soon",
+        Duration = 25
+    })
 end)
 
 tap8:AddButton("Open Awakening",function()
-
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Coming Soon",
+        Duration = 25
+    })
 end)
 
 tap8:AddButton("Open Haki",function()
-
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Notification System", 
+        Text = "Coming Soon",
+        Duration = 25
+    })
 end)
 
 local vu = game:GetService("VirtualUser")
