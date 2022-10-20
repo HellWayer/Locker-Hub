@@ -1,6 +1,3 @@
-do
-if infoKey1 = 'ehgirkllksx6515' then
-
 do local gui = game:GetService("CoreGui"):FindFirstChild("HovxrzGui") 
     if gui then 
         gui:Destroy() 
@@ -2873,7 +2870,3 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
    wait(1)
    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
-else
-game.Players.LocalPlayer:Kick('Wrong Key!!')
-end
-end
