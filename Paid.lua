@@ -1238,14 +1238,14 @@ function CheckLevel()
             NameMon = "Dark Master"
             CFrameQ = CFrame.new(-4842.1372070313, 717.69543457031, -2623.0483398438)
             CFrameMon = CFrame.new(-5148.1650390625, 439.04571533203, -2332.9611816406)
-		elseif MyLevel == 190 or MyLevel <= 209 or _G.Select_Mob_Farm == "Prisoner [Lv. 190]" then
+		elseif Lv == 190 or Lv <= 209 or SelectMonster == "Prisoner [Lv. 190]" then
 			Ms = "Prisoner [Lv. 190]"
 			NameQuest = "PrisonerQuest"
 			QuestLv = 1
 			NameMon = "Prisoner"
 			CFrameQuest = CFrame.new(5308.93115, 1.65517521, 475.120514)
 			CFrameMon = CFrame.new(5433.39307, 88.678093, 514.986877)
-		elseif MyLevel == 210 or MyLevel <= 249 or _G.Select_Mob_Farm == "Dangerous Prisoner [Lv. 210]" then
+		elseif Lv == 210 or Lv <= 249 or SelectMonster == "Dangerous Prisoner [Lv. 210]" then
 			Ms = "Dangerous Prisoner [Lv. 210]"
 			NameQuest = "PrisonerQuest"
 			QuestLv = 2
