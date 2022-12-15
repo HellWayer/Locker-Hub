@@ -1,15 +1,56 @@
-repeat wait() until game:IsLoaded()
-repeat wait() until game:GetService("Players")
-repeat wait() until game:GetService("Players").LocalPlayer
-do 
-    local gui = game:GetService("CoreGui"):FindFirstChild("HovxrzGui") 
+_G.Setting = {
+
+    --Tap 1
+    ["Kaiton"] = false     ,
+    ["Farm"] = false     ,
+    ["FarmSelectMon"] = false     ,
+    ["Quest"] = true     ,
+    ["FastAttackToggle"] = false     ,
+    ["SelectToolWeapon"] = nil     ,
+    ["SetHome"] = true     ,
+    ["FastAttack"] = true     ,
+    ["Rejoin"] = true     ,
+
+    
+    --Tap 2
+    ["Dough Boss"] = false     ,
+    ["NewWorld"] = false     ,
+ 
+
+    --Tap 3
+    ["Melee"] = false     ,
+    ["Defense"] = false     ,
+    ["Sword"] = false     ,
+    ["Gun"] = false     ,
+    ["DevilFruit"] = false     ,
+
+    ["StatKaiton"] = false     ,
+
+
+    --Tap 4
+
+
+    --Tap 5
+
+
+    --Tap 6
+    ["FpsBoost"] = false     ,
+    ["Haki"] = true     ,
+    ["Noclip"] = false     ,
+    ["DamageCounter"] = true     ,
+    ["WhiteScreen"] = false     ,
+
+
+}
+
+do local gui = game:GetService("CoreGui"):FindFirstChild("HovxrzGui") 
     if gui then 
         gui:Destroy()
         game.Players.LocalPlayer:kick("รันช้ำหา...")
     end 
 end
 
-if _G.Setting["WhiteScreen"] then
+if _G.Setting["FpsBoost"] then
 	local decalsyeeted = true
     local g = game
     local w = g.Workspace
@@ -1242,6 +1283,20 @@ function CheckLevel()
             NameMon = "Dark Master"
             CFrameQ = CFrame.new(-4842.1372070313, 717.69543457031, -2623.0483398438)
             CFrameMon = CFrame.new(-5148.1650390625, 439.04571533203, -2332.9611816406)
+		elseif MyLevel == 190 or MyLevel <= 209 or _G.Select_Mob_Farm == "Prisoner [Lv. 190]" then
+			Ms = "Prisoner [Lv. 190]"
+			NameQuest = "PrisonerQuest"
+			QuestLv = 1
+			NameMon = "Prisoner"
+			CFrameQuest = CFrame.new(5308.93115, 1.65517521, 475.120514)
+			CFrameMon = CFrame.new(5433.39307, 88.678093, 514.986877)
+		elseif MyLevel == 210 or MyLevel <= 249 or _G.Select_Mob_Farm == "Dangerous Prisoner [Lv. 210]" then
+			Ms = "Dangerous Prisoner [Lv. 210]"
+			NameQuest = "PrisonerQuest"
+			QuestLv = 2
+			NameMon = "Dangerous Prisoner"
+			CFrameQ = CFrame.new(5308.93115, 1.65517521, 475.120514)
+			CFrameMon = CFrame.new(5433.39307, 88.678093, 514.986877)
         elseif Lv == 250 or Lv <= 274 or SelectMonster == "Toga Warrior [Lv. 250]" then 
             Ms = "Toga Warrior [Lv. 250]"
             NameQuest = "ColosseumQuest"
@@ -1947,6 +2002,102 @@ spawn(function()
 		end
 	end)
 end)
+
+game:GetService("UserInputService").WindowFocused:connect(function()
+    game.RunService:Set3dRenderingEnabled(true)
+end)
+
+game:GetService("UserInputService").WindowFocusReleased:connect(function()
+    game.RunService:Set3dRenderingEnabled(false)
+end)
+
+spawn(function()
+    while wait(.1) do
+        if V1 then
+            pcall(function()
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer", "1")
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer", "2")
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer", "3")
+            end)
+        end
+    end
+end)
+spawn(function()
+    while wait() do
+        pcall(function()
+            if V1 then
+                UseCombats = true
+                UseCombat()
+            else
+                UseCombats = false
+            end
+        end)
+    end
+end)
+
+function UseCombat()
+    if UseCombats then
+        if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Talon") then
+            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Talon")
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+        elseif game.Players.LocalPlayer.Backpack:FindFirstChild("BlackLeg") then
+            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("BlackLeg")
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+        elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Combat") then
+            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+        elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") then
+            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Electro")
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+        elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") then
+            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate")
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+        elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Death Step") then
+            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Death Step")
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+        elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Electric Claw") then
+            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Electric Claw")
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+        elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Sharkman Karate") then
+            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Sharkman Karate")
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+        elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Talon") then
+            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Talon")
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+        elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Superhuman") then
+            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Superhuman")
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+        elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Godhuman") then
+            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Godhuman")
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+        end
+    end
+end
+
+spawn(function()
+    while wait(.1) do
+        pcall(function()
+            if V1 then
+                for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
+                    if v:IsA("Tool") then
+                        if string.find(v.Name, "Fruit") then
+                            repeat wait()
+                                wait(.1)
+                                v.Handle.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 10, 0)
+                                wait(.1)
+                                v.Handle.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 2, 0)
+                                wait(1)
+                                firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,v.Handle,0)
+                                wait(.1)
+                            until not getgenv().LevelFarm or v.Parent == game.Players.LocalPlayer.Character
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
+
 spawn(function()
     while wait(.1) do
         pcall(function()
@@ -3059,109 +3210,115 @@ function TP2(CFgo)
     end
 end
 
+function ByPass(Pos)
+    game.Players.LocalPlayer.Character.Head:Destroy()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+    wait(.5)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+end
+
 function tweenTP()
-    if TPStarters then
+    if true then
         if OldWorld then
             if TweenNameMap == "Jones Salad" then
-                TP(CFrame.new(1042.1501464844, 16.299360275269, 1444.3442382813))
+                ByPass(CFrame.new(1042.1501464844, 16.299360275269, 1444.3442382813))
             elseif TweenNameMap == "Marine1" then
-                TP(CFrame.new(-2599.6655273438, 6.9146227836609, 2062.2216796875))
+                ByPass(CFrame.new(-2599.6655273438, 6.9146227836609, 2062.2216796875))
             elseif TweenNameMap == "Marine2" then
-                TP(CFrame.new(-5081.3452148438, 85.221641540527, 4257.3588867188))
+                ByPass(CFrame.new(-5081.3452148438, 85.221641540527, 4257.3588867188))
             elseif TweenNameMap == "Midle Town" then
-                TP(CFrame.new(-655.97088623047, 7.878026008606, 1573.7612304688))
+                ByPass(CFrame.new(-655.97088623047, 7.878026008606, 1573.7612304688))
             elseif TweenNameMap == "Jungle" then
-                TP(CFrame.new(-1499.9877929688, 22.877912521362, 353.87060546875))
+                ByPass(CFrame.new(-1499.9877929688, 22.877912521362, 353.87060546875))
             elseif TweenNameMap == "Pirate Village" then
-                TP(CFrame.new(-1163.3889160156, 44.777843475342, 3842.8276367188))
+                ByPass(CFrame.new(-1163.3889160156, 44.777843475342, 3842.8276367188))
             elseif TweenNameMap == "Desert" then
-                TP(CFrame.new(954.02056884766, 6.6275520324707, 4262.611328125))
+                ByPass(CFrame.new(954.02056884766, 6.6275520324707, 4262.611328125))
             elseif TweenNameMap ==  "Frozen Village" then
-                TP(CFrame.new(1144.5270996094, 7.3292083740234, -1164.7322998047))
+                ByPass(CFrame.new(1144.5270996094, 7.3292083740234, -1164.7322998047))
             elseif TweenNameMap == "Colosseum" then
-                TP(CFrame.new(-1667.5869140625, 39.385631561279, -3135.5817871094))
+                ByPass(CFrame.new(-1667.5869140625, 39.385631561279, -3135.5817871094))
             elseif TweenNameMap == "Prison" then
-                TP(CFrame.new(4857.6982421875, 5.6780304908752, 732.75750732422))
+                ByPass(CFrame.new(4857.6982421875, 5.6780304908752, 732.75750732422))
             elseif TweenNameMap ==  "Mob Leader" then
-                TP(CFrame.new(-2841.9604492188, 7.3560485839844, 5318.1040039063))
+                ByPass(CFrame.new(-2841.9604492188, 7.3560485839844, 5318.1040039063))
             elseif TweenNameMap == "Magma Village" then
-                TP(CFrame.new(-5328.8740234375, 8.6164798736572, 8427.3994140625))
+                ByPass(CFrame.new(-5328.8740234375, 8.6164798736572, 8427.3994140625))
             elseif TweenNameMap == "UnderWater Gate" then
-                TP(CFrame.new(3893.953125, 5.3989524841309, -1893.4851074219))
+                ByPass(CFrame.new(3893.953125, 5.3989524841309, -1893.4851074219))
             elseif TweenNameMap == "UnderWater City" then
-                TP(CFrame.new(61191.12109375, 18.497436523438, 1561.8873291016))
+                ByPass(CFrame.new(61191.12109375, 18.497436523438, 1561.8873291016))
             elseif TweenNameMap == "Fountain City" then
-                TP(CFrame.new(5244.7133789063, 38.526943206787, 4073.4987792969))
+                ByPass(CFrame.new(5244.7133789063, 38.526943206787, 4073.4987792969))
             elseif TweenNameMap == "Sky1" then
-                TP(CFrame.new(-4878.0415039063, 717.71246337891, -2637.7294921875))
+                ByPass(CFrame.new(-4878.0415039063, 717.71246337891, -2637.7294921875))
             elseif TweenNameMap == "Sky2" then
-                TP(CFrame.new(-7899.6157226563, 5545.6030273438, -422.21798706055))
+                ByPass(CFrame.new(-7899.6157226563, 5545.6030273438, -422.21798706055))
             elseif TweenNameMap == "Sky3" then
-                TP(CFrame.new(-7868.5288085938, 5638.205078125, -1482.5548095703))
+                ByPass(CFrame.new(-7868.5288085938, 5638.205078125, -1482.5548095703))
             end
         elseif NewWorld then
             if TweenNameMap == "Dock" then
-                TP(CFrame.new(-12.519311904907, 19.302536010742, 2827.853515625))
+                ByPass(CFrame.new(-12.519311904907, 19.302536010742, 2827.853515625))
             elseif TweenNameMap == "Mansion" then
-                TP(CFrame.new(-390.34829711914, 321.89730834961, 869.00506591797))
+                ByPass(CFrame.new(-390.34829711914, 321.89730834961, 869.00506591797))
             elseif TweenNameMap == "Kingdom Of Rose" then
-                TP(CFrame.new(-388.29895019531, 138.35575866699, 1132.1662597656))
+                ByPass(CFrame.new(-388.29895019531, 138.35575866699, 1132.1662597656))
             elseif TweenNameMap == "Cafe" then
-                TP(CFrame.new(-379.70889282227, 73.0458984375, 304.84692382813))
+                ByPass(CFrame.new(-379.70889282227, 73.0458984375, 304.84692382813))
             elseif TweenNameMap == "Sunflower Field" then
-                TP(CFrame.new(-1576.7171630859, 198.61849975586, 13.725157737732))
+                ByPass(CFrame.new(-1576.7171630859, 198.61849975586, 13.725157737732))
             elseif TweenNameMap == "Jeramy Mountain" then
-                TP(CFrame.new(1986.3519287109, 448.95678710938, 796.70239257813))
+                ByPass(CFrame.new(1986.3519287109, 448.95678710938, 796.70239257813))
             elseif TweenNameMap == "Colossuem" then
-                TP(CFrame.new(-1871.8974609375, 45.820514678955, 1359.6843261719))
+                ByPass(CFrame.new(-1871.8974609375, 45.820514678955, 1359.6843261719))
             elseif TweenNameMap == "Factory" then
-                TP(CFrame.new(349.53750610352, 74.446998596191, -355.62420654297))
+                ByPass(CFrame.new(349.53750610352, 74.446998596191, -355.62420654297))
             elseif TweenNameMap == "The Bridge" then
-                TP(CFrame.new(-1860.6354980469, 88.384948730469, -1859.1593017578))
+                ByPass(CFrame.new(-1860.6354980469, 88.384948730469, -1859.1593017578))
             elseif TweenNameMap == "Green Bit" then
-                TP(CFrame.new(-2202.3706054688, 73.097663879395, -2819.2687988281))
+                ByPass(CFrame.new(-2202.3706054688, 73.097663879395, -2819.2687988281))
             elseif TweenNameMap == "Graveyard" then
-                TP(CFrame.new(-5617.5927734375, 492.22183227539, -778.3017578125))
+                ByPass(CFrame.new(-5617.5927734375, 492.22183227539, -778.3017578125))
             elseif TweenNameMap == "Dark Area" then
-                TP(CFrame.new(3464.7700195313, 13.375151634216, -3368.90234375))
+                ByPass(CFrame.new(3464.7700195313, 13.375151634216, -3368.90234375))
             elseif TweenNameMap == "Snow Mountain" then
-                TP(CFrame.new(561.23834228516, 401.44781494141, -5297.14453125))
+                ByPass(CFrame.new(561.23834228516, 401.44781494141, -5297.14453125))
             elseif TweenNameMap == "Hot Island" then
-                TP(CFrame.new(-5505.9633789063, 15.977565765381, -5366.6123046875))
+                ByPass(CFrame.new(-5505.9633789063, 15.977565765381, -5366.6123046875))
             elseif TweenNameMap == "Cold Island" then
-                TP(CFrame.new(-5924.716796875, 15.977565765381, -4996.427734375))
+                ByPass(CFrame.new(-5924.716796875, 15.977565765381, -4996.427734375))
             elseif TweenNameMap == "Ice Castle" then
-                TP(CFrame.new(6111.7109375, 294.41259765625, -6716.4829101563))
+                ByPass(CFrame.new(6111.7109375, 294.41259765625, -6716.4829101563))
             elseif TweenNameMap == "Usopp's Island" then
-                TP(CFrame.new(4760.4985351563, 8.3444719314575, 2849.2426757813))
+                ByPass(CFrame.new(4760.4985351563, 8.3444719314575, 2849.2426757813))
             elseif TweenNameMap == "inscription Island" then
-                TP(CFrame.new(-5099.01171875, 98.241539001465, 2424.4035644531))
+                ByPass(CFrame.new(-5099.01171875, 98.241539001465, 2424.4035644531))
             elseif TweenNameMap == "Forgotten Island" then
-                TP(CFrame.new(-3051.9514160156, 238.87203979492, -10250.807617188))
+                ByPass(CFrame.new(-3051.9514160156, 238.87203979492, -10250.807617188))
             elseif TweenNameMap == "Ghost Ship" then
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
             end
         elseif ThreeWorld then
             if TweenNameMap == "Port Town" then
-                TP(CFrame.new(-275.21615600586, 43.755737304688, 5451.0659179688))
+                ByPass(CFrame.new(-275.21615600586, 43.755737304688, 5451.0659179688))
             elseif TweenNameMap == "Hydra Island" then
-                TP(CFrame.new(5541.2685546875, 668.30456542969, 195.48069763184))
+                ByPass(CFrame.new(5541.2685546875, 668.30456542969, 195.48069763184))
             elseif TweenNameMap == "Gaint Tree" then
-                TP(CFrame.new(2276.0859375, 25.87850189209, -6493.03125))
+                ByPass(CFrame.new(2276.0859375, 25.87850189209, -6493.03125))
             elseif TweenNameMap == "Mansion" then
-                TP(CFrame.new(-12548.998046875, 332.40396118164, -7603.1865234375))
+                ByPass(CFrame.new(-12548.998046875, 332.40396118164, -7603.1865234375))
             elseif TweenNameMap == "Castle on the Sea" then
-                TP(CFrame.new(-5498.0458984375, 313.79473876953, -2860.6022949219))
+                ByPass(CFrame.new(-5498.0458984375, 313.79473876953, -2860.6022949219))
             elseif TweenNameMap == "Graveyard Island" then
-                TP(CFrame.new(-9515.07324, 142.130615, 5537.58398))
+                ByPass(CFrame.new(-9515.07324, 142.130615, 5537.58398))
             elseif TweenNameMap == "Icecream Island" then
-                TP(CFrame.new(-880.894531, 118.245354, -11030.7607))
+                ByPass(CFrame.new(-880.894531, 118.245354, -11030.7607))
             elseif TweenNameMap == "Peanut Island" then
-                TP(CFrame.new(-2124.06738, 44.0723495, -10179.8281))
+                ByPass(CFrame.new(-2124.06738, 44.0723495, -10179.8281))
             elseif TweenNameMap == "Lab" then
-                TP(CFrame.new(-5057.146484375, 314.54132080078, -2934.7995605469))
-            elseif TweenNameMap == "Dummy" then
-                TP(CFrame.new(3469.6611328125, 90.88251495361328, 257.87103271484375))
+                ByPass(CFrame.new(-5057.146484375, 314.54132080078, -2934.7995605469))
             elseif TweenNameMap == "MysticIsland" then
                 TP(game:GetService("Workspace").Map:FindFirstChild("MysticIsland").HumanoidRootPart.CFrame * CFrame.new(0,500,-100))
             end
@@ -3192,26 +3349,10 @@ tap4:AddButton("Mansion ( Warp )", function()
     end
 end)
 
-spawn(function()
-    while wait(.1) do
-        pcall(function()
-            if TPStarters then
-                tweenTP()
-                wait()
-            end
-        end)
-    end
+tap4:AddButton("Teleport", function()
+    tweenTP()
 end)
 
-tap4:AddButton("Start Teleport", function()
-    TPStarters = true
-end)
-
-tap4:AddButton("Stop Teleport", function()
-    TPStarters = false
-    wait(.5)
-    TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
-end)
 wait(0.5)
 local tap5 = Library:AddTab("Dungeon")
 
@@ -3380,6 +3521,16 @@ local tap8 = Library:AddTab("Misc")
 
 tap8:AddSeperator("Misc")
 
+tap8:AddButton("AFK", function()
+    warn("AFK : On")
+    game:GetService("Players").LocalPlayer.Idled:connect(function()
+        local vu = game:GetService("VirtualUser")
+        vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+        wait(1)
+        vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    end)
+end)
+
 tap8:AddToggle("Auto Haki", _G.Setting["Haki"], function(v)
     Haki_Toggle = v
 end)
@@ -3400,7 +3551,7 @@ end)
 spawn(function()
     while wait(.1) do
         pcall(function()
-            if V1 or White_Screen then
+            if White_Screen then
                 game.Lighting.FogEnd = math.huge
                 if game:GetService("Lighting"):FindFirstChild("FantasySky") then game:GetService("Lighting").FantasySky:Destroy() end
                 game:GetService("RunService"):Set3dRenderingEnabled(false)
@@ -3567,12 +3718,4 @@ task.spawn(function()
 			end)
 		end)
 	end
-end)
-
-warn("AFK : On")
-game:GetService("Players").LocalPlayer.Idled:connect(function()
-    local vu = game:GetService("VirtualUser")
-    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-    wait(1)
-    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
