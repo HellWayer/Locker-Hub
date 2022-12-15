@@ -2320,7 +2320,7 @@ spawn(function()
     end)
 end)
 
---[[local plr = game.Players.LocalPlayer
+local plr = game.Players.LocalPlayer
 local CbFw = debug.getupvalues(require(game.Players.LocalPlayer.PlayerScripts.CombatFramework))
 local CbFw2 = CbFw[2]
 
@@ -2525,7 +2525,7 @@ spawn(function()
             end
         end)
     end
-end)]]
+end)
 
 local Tp_ = game:GetService('TeleportService')
 local Gc_ = game.CoreGui.RobloxPromptGui.promptOverlay
