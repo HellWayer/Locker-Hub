@@ -2428,14 +2428,6 @@ function GetCurrentBlade()
     return ret
 end
 
-if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
-	game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
-end
-
-if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
-	game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
-end
-
 function AttackNoCD(Num)
     if Num == 1 then
         local AC = CbFw2.activeController
@@ -2643,6 +2635,15 @@ end)
 wait(.01)
 tap1:AddToggle("Auto Rejoin", _G.Setting.Rejoin, function(v)
     Auto_Join_From_Kick = v
+end)
+wait(.01)
+tap1:AddButton("Delete Fx Death & Respawn", function()
+    if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
+        game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
+    end
+    if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
+        game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
+    end
 end)
 
 local tap2 = Library:AddTab("More Farm")
@@ -3633,8 +3634,11 @@ tap5:AddToggle("Auto Next Island", _G.Setting.NextIsland, function(v)
     end
 end)
 
-tap5:AddToggle("Auto Buy Raid", _G.Setting.BuyRaid, function(v)
+tap5:AddToggle("Auto Raid", _G.Setting.BuyRaid, function(v)
     BuyRaid = v
+    NextIsland = v 
+    wait(10)
+    Killaura = v
 end)
 
 tap5:AddSeperator("Awake Fruit")
