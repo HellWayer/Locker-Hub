@@ -1,48 +1,11 @@
 _G.Setting = {
-    
-    ["Kaiton"] = false     ,-- true -- false --
-    ["Farm"] = false     ,-- true -- false --
-    ["FarmSelectMon"] = false     ,-- true -- false --
     ["Quest"] = true     ,-- true -- false --
-    ["FastAttackToggle"] = false     ,-- true -- false --
-    ["SelectToolWeapon"] = nil     ,-- true -- false --
-    ["SelectToolWeaponMisc"] = nil      ,-- true -- false --
     ["SetHome"] = true     ,-- true -- false --
     ["FastAttack"] = true     ,-- true -- false --
     ["Magnet"] = true     ,-- true -- false --
     ["Rejoin"] = true     ,-- true -- false --
-
-    ["Dough Boss"] = false     ,-- true -- false --
-    ["Bone"] = false     ,-- true -- false --
-    ["NewWorld"] = false     ,-- true -- false --
-    ["ThirdWorld"] = false     ,-- true -- false --
-    ["Bartilo"] = false     ,-- true -- false --
-    ["Swan"] = false     ,-- true -- false --
-
-    ["Melee"] = false     ,-- true -- false --
-    ["Defense"] = false     ,-- true -- false --
-    ["Sword"] = false     ,-- true -- false --
-    ["Gun"] = false     ,-- true -- false --
-    ["DevilFruit"] = false     ,-- true -- false --
-    ["StatKaiton"] = false     ,-- true -- false --
-
-    ["Bypass Teleport"] = false     ,-- true -- false --
-
-    ["Kill Aura"] = false     ,-- true -- false --
-    ["Kill Aura All"] = false     ,-- true -- false --   
-    ["Next Island"] = false     ,-- true -- false --
-    ["Buy Raid"] = false     ,-- true -- false --
-    ["Awake Fruit"] = false     ,-- true -- false --
-
     ["AFK"] = true     ,-- true -- false --
-    ["Bring Fruit"] = false     ,-- true -- false --
-    ["FpsBoost"] = false     ,-- true -- false --
-    ["Magnet_200"] = false  ,-- true -- false --
     ["Haki"] = true     ,-- true -- false --
-    ["Noclip"] = false     ,-- true -- false --
-    ["DamageCounter"] = true     ,-- true -- false --
-    ["WhiteScreen"] = false     ,-- true -- false --
-    ["Surprise"] = false     ,-- true -- false --
 
 }
 
