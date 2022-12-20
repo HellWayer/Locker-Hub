@@ -3341,13 +3341,10 @@ function ByPass(Pos)
         if ByPass_TP then
             NameTP = Pos
             game.Players.LocalPlayer.Character.Head:Destroy()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos 
+            wait(.25)
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
-            task.wait()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
-            for i = 1,5 do
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-            end
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
         elseif ByPass_TP == false then
             pcall(function()
                 TP(Pos)
