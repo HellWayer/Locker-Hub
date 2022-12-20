@@ -2451,7 +2451,7 @@ function AttackNoCD(Num)
                 debug.setupvalue(AC.attack, 7, u10)
                 pcall(function()
                     if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
-                        AC.animator.anims.basic[1]:Play(0.01,0.01,0.01)
+                        AC.animator.anims.basic[1]:Play(0.01,0.025,0.035)
                         game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
                         game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
                         game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
@@ -2496,7 +2496,7 @@ function AttackNoCD(Num)
                                     CombatFrameworkR.activeController.timeToNextAttack = tick()
                                     game:GetService("VirtualUser"):CaptureController()
                                     game:GetService("VirtualUser"):ClickButton1(Vector2.new(1300,760), game:GetService("Workspace").Camera.CFrame)
-                                    AC.animator.anims.basic[1]:Play(0.01,0.01,0.01)
+                                    AC.animator.anims.basic[1]:Play(0.01,0.025,0.035)
                                 end
                             end)
                         end
@@ -2528,10 +2528,10 @@ spawn(function()
             local Hits = STOPRL.getBladeHits(b,c,d)
             if Hits then
                 STOP.play = function() end
-                a:Play(0.01,0.01,0.01)
+                a:Play(0.01,0.025,0.035)
                 func(Hits)
                 STOP.play = shared.cpc
-                wait(a.length * 0.5)
+                wait(0.5)
                 a:Stop()
             end
         end
@@ -2551,8 +2551,13 @@ spawn(function()
     end
 end)
 
+b2 = tick()
 spawn(function()
     while wait(FastWait) do
+        if b2 - tick() > 0.75 then
+            wait(0.001)
+            b2 = tick()
+        end
         pcall(function()
             if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and Fast_Delay and Fast_Delay_Click_Custom then
                 AttackNoCD(1)
@@ -2595,14 +2600,14 @@ if FastWait == nil then
     FastWait = .125
 end
 
-tap1:AddDropdown("Fast Attack [ Mode ]", {"V.0.5","V.1","V.2 Risk Kick"}, function(v)
+tap1:AddDropdown("Fast Attack [ Mode ]", {"V.0.5","V.1","V.2"}, function(v)
     if v == "V.0.5" then
         FastWait = .125
         warn("FastAttack [ V 0.5 ]")
     elseif v == "V.1" then
         FastWait = .1
         warn("FastAttack [ V 1 ]")
-    elseif v == "V.2 Risk Kick" then
+    elseif v == "V.2" then
         FastWait = -1
         warn("FastAttack [ V 2 ]")
     else
