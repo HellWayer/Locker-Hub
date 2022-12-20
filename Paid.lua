@@ -3608,6 +3608,7 @@ end)
 
 tap5:AddToggle("Auto Next Island", _G.Setting.NextIsland, function(v)
     NextIsland = v
+    TweenTpRaid = v
     if v == false then
         wait(.1)
         TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
