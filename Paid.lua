@@ -2521,6 +2521,10 @@ function AttackNoCD(Num)
     end
 end
 
+if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
+	game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
+end
+
 local STOP = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.Particle)
 local STOPRL = require(game:GetService("ReplicatedStorage").CombatFramework.RigLib)
 
@@ -2635,15 +2639,6 @@ end)
 wait(.01)
 tap1:AddToggle("Auto Rejoin", _G.Setting.Rejoin, function(v)
     Auto_Join_From_Kick = v
-end)
-wait(.01)
-tap1:AddButton("Delete Fx Death & Respawn", function()
-    if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
-        game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
-    end
-    if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
-        game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
-    end
 end)
 
 local tap2 = Library:AddTab("More Farm")
