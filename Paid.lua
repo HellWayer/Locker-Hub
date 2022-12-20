@@ -2001,50 +2001,36 @@ spawn(function()
     while wait() do
         pcall(function()
             if V1 then
-                UseCombats = true
                 UseCombat()
-            else
-                UseCombats = false
             end
         end)
     end
 end)
 
 function UseCombat()
-    if UseCombats then
+    if true then
         if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Talon") then
-            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Talon")
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+            SelectToolWeapon = "Dragon Talon"
         elseif game.Players.LocalPlayer.Backpack:FindFirstChild("BlackLeg") then
-            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("BlackLeg")
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+            SelectToolWeapon = "BlackLeg"
         elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Combat") then
-            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+            SelectToolWeapon = "Combat"
         elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") then
-            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Electro")
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+            SelectToolWeapon = "Electro"
         elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") then
-            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate")
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+            SelectToolWeapon = "Fishman Karate"
         elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Death Step") then
-            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Death Step")
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+            SelectToolWeapon = "Death Step"
         elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Electric Claw") then
-            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Electric Claw")
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+            SelectToolWeapon = "Electric Claw"
         elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Sharkman Karate") then
-            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Sharkman Karate")
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+            SelectToolWeapon = "Sharkman Karate"
         elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Talon") then
-            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Talon")
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+            SelectToolWeapon = "Dragon Talon"
         elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Superhuman") then
-            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Superhuman")
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+            SelectToolWeapon = "Superhuman"
         elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Godhuman") then
-            local tools = game.Players.LocalPlayer.Backpack:FindFirstChild("Godhuman")
-            game.Players.LocalPlayer.Character.Humanoid:EquipTool(tools)
+            SelectToolWeapon = "Godhuman"
         end
     end
 end
@@ -2116,7 +2102,7 @@ end)
 spawn(function()
     pcall(function()
         while task.wait() do 
-            if V1 or TPPos or NextIsland or Auto_Bone or New_World or autofarmV1 or AutoFarmSelectMon or atoMoB then
+            if TweenTpRaid or V1 or TPPos or NextIsland or Auto_Bone or New_World or autofarmV1 or AutoFarmSelectMon or atoMoB then
                 if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                     local BodyV = Instance.new("BodyVelocity")
                     BodyV.Name = "BodyClip"
@@ -3632,6 +3618,7 @@ end)
 tap5:AddToggle("Auto Raid", _G.Setting.BuyRaid, function(v)
     BuyRaid = v
     NextIsland = v 
+    TweenTpRaid = v
     wait(10)
     Killaura = v
 end)
