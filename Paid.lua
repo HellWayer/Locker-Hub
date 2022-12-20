@@ -1,11 +1,11 @@
 _G.Setting = {
-    ["Quest"] = true     ,-- true -- false --
-    ["SetHome"] = true     ,-- true -- false --
-    ["FastAttack"] = true     ,-- true -- false --
-    ["Magnet"] = true     ,-- true -- false --
-    ["Rejoin"] = true     ,-- true -- false --
-    ["AFK"] = true     ,-- true -- false --
-    ["Haki"] = true     ,-- true -- false --
+    Quest = true     ,
+    SetHome = true     ,
+    FastAttack = true     ,
+    Magnet = true     ,
+    Rejoin = true     ,
+    AFK = true     ,
+    Haki = true     ,
 
 }
 
@@ -57,18 +57,6 @@ end
 
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
-
-spawn(function()
-    local sound = Instance.new('Sound', game.CoreGui)
-    sound.Name = "Startup Sound"
-    sound.SoundId = "rbxassetid://6958727243"
-    sound.Volume = 0.5
-    sound:Play()
-    sound.Stopped:Wait()
-    sound:Destroy()
-end)
-
-wait(.6)
 
 local function MakeDraggable(topbarobject, object)
 	local Dragging = nil
@@ -2157,7 +2145,7 @@ spawn(function()
     end)
 end)
 wait(.01)
-tap1:AddToggle("Auto Kaiton", _G.Setting["Kaiton"], function(v)
+tap1:AddToggle("Auto Kaiton", _G.Setting.Kaiton, function(v)
     wait(.1);
     wait(1);
     V1 = v;
@@ -2172,7 +2160,7 @@ tap1:AddToggle("Auto Kaiton", _G.Setting["Kaiton"], function(v)
     end
 end)
 wait(.01)
-tap1:AddToggle("Auto Farm Level", _G.Setting["Farm"], function(v)
+tap1:AddToggle("Auto Farm Level", _G.Setting.Farm, function(v)
     if SelectToolWeapon == "" or SelectToolWeapon == nil then
         game.StarterGui:SetCore("SendNotification", {
             Title = "Notification System", 
@@ -2315,7 +2303,7 @@ elseif ThreeWorld then
     SelectMonFarm = {"Default","Pirate Millionaire [Lv. 1500]","Pistol Billionaire [Lv. 1525]" ,"Dragon Crew Warrior [Lv. 1575]", "Dragon Crew Archer [Lv. 1600]","Female Islander [Lv. 1625]","Giant Islander [Lv. 1650]","Marine Commodore [Lv. 1700]","Marine Rear Admiral [Lv. 1725]","Fishman Raider [Lv. 1775]","Fishman Captain [Lv. 1800]","Forest Pirate [Lv. 1825]","Mythological Pirate [Lv. 1850]","Jungle Pirate [Lv. 1900]","Musketeer Pirate [Lv. 1925]","Reborn Skeleton [Lv. 1975]","Living Zombie [Lv. 2000]","Demonic Soul [Lv. 2025]","Posessed Mummy [Lv. 2050]","Peanut Scout [Lv. 2075]","Peanut President [Lv. 2100]","Ice Cream Chef [Lv. 2125]","Ice Cream Commander [Lv. 2150]","Cookie Crafter [Lv. 2200]","Cake Guard [Lv. 2225]","Baking Staff [Lv. 2250]","Head Baker [Lv. 2275]","Cocoa Warrior [Lv. 2300]","Chocolate Bar Battler [Lv. 2325]","Sweet Thief [Lv. 2350]","Candy Rebel [Lv. 2375]"}
 end
 
-tap1:AddToggle("Auto Farm ( Select )", _G.Setting["FarmSelectMon"], function(v)
+tap1:AddToggle("Auto Farm ( Select )", _G.Setting.FarmSelectMon, function(v)
     if SelectToolWeapon == "" or SelectToolWeapon == nil then
          game.StarterGui:SetCore("SendNotification", {
             Title = "Notification System", 
@@ -2338,11 +2326,11 @@ tap1:AddToggle("Auto Farm ( Select )", _G.Setting["FarmSelectMon"], function(v)
     end
 end)
 wait(.01)
-tap1:AddToggle("Auto Quest", _G.Setting["Quest"], function(v)
+tap1:AddToggle("Auto Quest", _G.Setting.Quest, function(v)
     AutoQuestFarm = v
 end)
 wait(.01)
-tap1:AddToggle("Fast Attack", _G.Setting["FastAttackToggle"], function(v)
+tap1:AddToggle("Fast Attack", _G.Setting.FastAttackToggle, function(v)
     DAFast = v
 end)
 wait(.01)
@@ -2369,7 +2357,7 @@ for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
     end
 end
 
-local DropWeaponMain = tap1:AddDropdown("Weapon [ Main Farm ]", Weapon or _G.Setting["SelectToolWeapon"], function(v)
+local DropWeaponMain = tap1:AddDropdown("Weapon [ Main Farm ]", Weapon or _G.Setting.SelectToolWeapon, function(v)
     SelectToolWeapon = v
     SelectToolWeaponOld = v
     wait(.1)
@@ -2380,7 +2368,7 @@ local DropWeaponMain = tap1:AddDropdown("Weapon [ Main Farm ]", Weapon or _G.Set
     })
 end)
 
-local DropWeaponMisc = tap1:AddDropdown("Weapon [ More Farm ]", Weapon or _G.Setting["SelectToolWeaponMisc"], function(v)
+local DropWeaponMisc = tap1:AddDropdown("Weapon [ More Farm ]", Weapon or _G.Setting.SelectToolWeaponMisc, function(v)
     SelectToolWeaponMisc = v
     game.StarterGui:SetCore("SendNotification", {
         Title = "Notification System", 
@@ -2640,23 +2628,23 @@ tap1:AddDropdown("Fast Attack [ Mode ]", {"V.0.5","V.1","V.2 Risk Kick"}, functi
     end
 end)
 
-tap1:AddToggle("Set Spawn Home", _G.Setting["SetHome"], function(v)
+tap1:AddToggle("Set Spawn Home", _G.Setting.SetHome, function(v)
     AutoSetSpawn = v
 
 end)
 wait(.01)
-tap1:AddToggle("Fast Attack", _G.Setting["FastAttack"], function(v)
+tap1:AddToggle("Fast Attack", _G.Setting.FastAttack, function(v)
     Fast_Delay_Click_Custom = v
 end)
 wait(.01)
-tap1:AddToggle("Magnet", _G.Setting["Magnet"], function(v)
+tap1:AddToggle("Magnet", _G.Setting.Magnet, function(v)
     MagnetMain = v
 end)
 wait(.01)
-tap1:AddToggle("Auto Rejoin", _G.Setting["Rejoin"], function(v)
+tap1:AddToggle("Auto Rejoin", _G.Setting.Rejoin, function(v)
     Auto_Join_From_Kick = v
 end)
-wait(0.5)
+
 local tap2 = Library:AddTab("More Farm")
 
 tap2:AddSeperator("Farm Boss")
@@ -2802,7 +2790,7 @@ spawn(function()
 end)
 
 
-tap2:AddToggle("Auto Farm Mastery ( not use )", _G.Setting["Mastery Wespon"], function(v)
+tap2:AddToggle("Auto Farm Mastery ( not use )", _G.Setting.MasteryWespon, function(v)
     if SelectToolWeaponMisc == "" or SelectToolWeaponMisc == nil then
          game.StarterGui:SetCore("SendNotification", {
             Title = "Notification System", 
@@ -2822,7 +2810,7 @@ tap2:AddToggle("Auto Farm Mastery ( not use )", _G.Setting["Mastery Wespon"], fu
     end
 end)
 
-tap2:AddToggle("Auto Dough Boss", _G.Setting["Dough Boss"], function(v)
+tap2:AddToggle("Auto Dough Boss", _G.Setting.DoughBoss, function(v)
     if SelectToolWeaponMisc == "" or SelectToolWeaponMisc == nil then
          game.StarterGui:SetCore("SendNotification", {
             Title = "Notification System", 
@@ -2842,7 +2830,7 @@ tap2:AddToggle("Auto Dough Boss", _G.Setting["Dough Boss"], function(v)
     end
 end)
 
-tap2:AddToggle("Auto Bone", _G.Setting["Bone"], function(v)
+tap2:AddToggle("Auto Bone", _G.Setting.Bone, function(v)
     if SelectToolWeaponMisc == "" or SelectToolWeaponMisc == nil then
          game.StarterGui:SetCore("SendNotification", {
             Title = "Notification System", 
@@ -2966,7 +2954,7 @@ if OldWorld then
         end
     end)
 
-    tap2:AddToggle("Auto NewWorld", _G.Setting["NewWorld"], function(v)
+    tap2:AddToggle("Auto NewWorld", _G.Setting.NewWorld, function(v)
         New_World = v
         if v == false then
             wait(0.1)
@@ -3154,7 +3142,7 @@ if NewWorld then
     end)
 end
 if NewWorld then
-    tap2:AddToggle("Auto ThirdWorld", _G.Setting["ThirdWorld"], function(v)
+    tap2:AddToggle("Auto ThirdWorld", _G.Setting.ThirdWorld, function(v)
         AutoThirdWorld = v
         if v == false then
             wait(0.1)
@@ -3162,7 +3150,7 @@ if NewWorld then
             TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
         end
     end)
-    tap2:AddToggle("Auto Bartilo", _G.Setting["Bartilo"], function(v)
+    tap2:AddToggle("Auto Bartilo", _G.Setting.Bartilo, function(v)
         AutoBartilo = v
         if v == false then
             wait(0.1)
@@ -3170,7 +3158,7 @@ if NewWorld then
             TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
         end
     end)
-    tap2:AddToggle("Auto Swan", _G.Setting["Swan"], function(v)
+    tap2:AddToggle("Auto Swan", _G.Setting.Swan, function(v)
         AutoSwan = v
         if v == false then
             wait(0.1)
@@ -3179,7 +3167,7 @@ if NewWorld then
         end
     end)
 end
-wait(0.5)
+
 local tap3 = Library:AddTab("Stats")
 
 tap3:AddSeperator("Stats")
@@ -3236,32 +3224,32 @@ spawn(function()
 	end
 end)
 
-tap3:AddToggle("Auto Melee", _G.Setting["Melee"], function(v)
+tap3:AddToggle("Auto Melee", _G.Setting.Melee, function(v)
     melee = v
 end)
 
-tap3:AddToggle("Auto Defense", _G.Setting["Defense"], function(v)
+tap3:AddToggle("Auto Defense", _G.Setting.Defense, function(v)
     def = v
 end)
 
-tap3:AddToggle("Auto Sword", _G.Setting["Sword"], function(v)
+tap3:AddToggle("Auto Sword", _G.Setting.Sword, function(v)
     sword = v
 end)
 
-tap3:AddToggle("Auto Gun", _G.Setting["Gun"], function(v)
+tap3:AddToggle("Auto Gun", _G.Setting.Gun, function(v)
     gun = v
 end)
 
-tap3:AddToggle("Auto DevilFruit", _G.Setting["DevilFruit"], function(v)
+tap3:AddToggle("Auto DevilFruit", _G.Setting.DevilFruit, function(v)
     DevilFruit = v
 end)
 
 tap3:AddSeperator("Stats Kaiton")
 
-tap3:AddToggle("Auto Stats Kaiton", _G.Setting["StatKaiton"], function(v)
+tap3:AddToggle("Auto Stats Kaiton", _G.Setting.StatKaiton, function(v)
     AutoStat = v 
 end)
-wait(0.5)
+
 local tap4 = Library:AddTab("Teleports")
 
 if OldWorld then
@@ -3526,7 +3514,7 @@ tap4:AddDropdown("Select Teleport", TPselect, function(lol)
     TweenNameMap = lol
 end)
 
-tap4:AddToggle("Bypass Teleport", _G.Setting["Bypass Teleport"], function(v)
+tap4:AddToggle("Bypass Teleport", _G.Setting.BypassTeleport, function(v)
     ByPass_TP = v
 end)
 
@@ -3556,7 +3544,6 @@ tap4:AddButton("Mansion ( Warp )", function()
     end
 end)
 
-wait(0.5)
 local tap5 = Library:AddTab("Dungeon")
 
 tap5:AddSeperator("Raid")
@@ -3629,15 +3616,15 @@ tap5:AddDropdown("Select Raid", {"Flame", "Ice", "Quake", "Light", "Dark", "Stri
     SelectRaid = v
 end)
 
-tap5:AddToggle("Kill Aura", _G.Setting["Kill Aura"], function(v)
+tap5:AddToggle("Kill Aura", _G.Setting.KillAura, function(v)
     Killaura = v
 end)
 
-tap5:AddToggle("Kill Aura All Mob ( Rick )", _G.Setting["Kill Aura All"], function(v)
+tap5:AddToggle("Kill Aura All Mob ( Rick )", _G.Setting.KillAuraAll, function(v)
     KillauraAll = v
 end)
 
-tap5:AddToggle("Auto Next Island", _G.Setting["Next Island"], function(v)
+tap5:AddToggle("Auto Next Island", _G.Setting.NextIsland, function(v)
     NextIsland = v
     if v == false then
         wait(.1)
@@ -3646,7 +3633,7 @@ tap5:AddToggle("Auto Next Island", _G.Setting["Next Island"], function(v)
     end
 end)
 
-tap5:AddToggle("Auto Buy Raid", _G.Setting["Buy Raid"], function(v)
+tap5:AddToggle("Auto Buy Raid", _G.Setting.BuyRaid, function(v)
     BuyRaid = v
 end)
 
@@ -3664,11 +3651,10 @@ spawn(function()
 	end
 end)
 
-tap5:AddToggle("Auto Awake Fruit", _G.Setting["Awake Fruit"], function(v)
+tap5:AddToggle("Auto Awake Fruit", _G.Setting.AwakeFruit, function(v)
     RaidAwaken = v
 end)
 
-wait(0.5)
 local tap6 = Library:AddTab("Item & Buy")
 tap6:AddSeperator("ResetStats & Reroll race")
 
@@ -3747,7 +3733,7 @@ end)
 tap6:AddButton("Godhuman",function()
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman")
 end)
-wait(0.5)
+
 local tap8 = Library:AddTab("Misc")
 
 tap8:AddSeperator("Misc")
@@ -3780,27 +3766,27 @@ tap8:AddButton("AFK", function()
     end)
 end)
 
-tap8:AddToggle("Magnet 200", _G.Setting["Magnet_200"], function(v)
+tap8:AddToggle("Magnet 200", _G.Setting.Magnet_200, function(v)
     CustamMagNet = v
 end)
 
-tap8:AddToggle("Bring Fruit", _G.Setting["Bring Fruit"], function(v)
+tap8:AddToggle("Bring Fruit", _G.Setting.BringFruit, function(v)
 	BringFruit = v
 end)
 
-tap8:AddToggle("Auto Haki", _G.Setting["Haki"], function(v)
+tap8:AddToggle("Auto Haki", _G.Setting.Haki, function(v)
     Haki_Toggle = v
 end)
 
-tap8:AddToggle("Nocilp", _G.Setting["Noclip"], function(v)
+tap8:AddToggle("Nocilp", _G.Setting.Noclip, function(v)
     NoClip_Toggle = v
 end)
 
-tap8:AddToggle("DamageCounter", _G.Setting["DamageCounter"], function(v)
+tap8:AddToggle("DamageCounter", _G.Setting.DamageCounter, function(v)
     game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = v
 end)
 
-tap8:AddToggle("White Screen", _G.Setting["WhiteScreen"], function(v)
+tap8:AddToggle("White Screen", _G.Setting.WhiteScreen, function(v)
     White_Screen = v
 end)
 
@@ -3950,7 +3936,7 @@ if ThreeWorld then
         end
     end)
 
-    tap8:AddToggle("Buy Bone Surprise", _G.Setting["Surprise"],function(v)
+    tap8:AddToggle("Buy Bone Surprise", _G.Setting.Surprise,function(v)
         AutoBuySurprise = v
     end)
 
