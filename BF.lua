@@ -6,6 +6,7 @@ _G.Setting = {
     SelectToolWeapon = nil  ,
     SelectToolWeaponMisc = nil  ,
     FastFarm = false    ,
+
     Abilities = false   ,
     DoughBoss = false  ,  
     Bone = false  ,  
@@ -14,18 +15,22 @@ _G.Setting = {
     LegendarySword  = false  ,
     Bartilo = false  ,    
     Swan = false  ,  
+
     Melee = false  , 
     Defense = false  , 
     Sword = false  ,  
     Gun = false  , 
     DevilFruit = false  ,
     StatKaiton = false  , 
+
     BypassTeleport = false  ,  
+
     KillAura = false  ,  
     KillAuraAll = false  ,   
     NextIsland = false  ,  
     BuyRaid = false  ,   
     AwakeFruit = false  ,  
+
     BringFruit = false  ,    
     FpsBoost = false  ,   
     Magnet_200 = false  , 
@@ -33,6 +38,7 @@ _G.Setting = {
     DamageCounter = true  ,  
     WhiteScreen = false  ,  
     Surprise = false  ,
+
     Quest = true     ,
     SetHome = true     ,
     FastAttack = true     ,
@@ -46,7 +52,7 @@ _G.Setting = {
 do local gui = game:GetService("CoreGui"):FindFirstChild("HovxrzGui") 
     if gui then 
         gui:Destroy()
-        game.Players.LocalPlayer:kick("รันช้ำหา...")
+        game.Players.LocalPlayer:kick("Bro????????????")
     end 
 end
 
@@ -2539,6 +2545,14 @@ function GetCurrentBlade()
     return ret
 end
 
+if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
+	game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
+end
+
+if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
+	game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
+end
+
 function AttackNoCD(Num)
     if Num == 1 then
         local AC = CbFw2.activeController
@@ -2629,10 +2643,6 @@ function AttackNoCD(Num)
             end
         end
     end
-end
-
-if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
-	game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
 end
 
 local STOP = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.Particle)
@@ -2727,6 +2737,7 @@ spawn(function()
         end)
     end
 end)
+
 if FastWait == nil then
     FastWait = .150
 end
