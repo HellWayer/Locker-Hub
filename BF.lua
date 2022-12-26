@@ -1722,13 +1722,27 @@ function CheckLevel()
 			NameMon = "Sweet Thief"
 			CFrameQ = CFrame.new(151.198, 24.8907, -12774.6)
 			CFrameMon = CFrame.new(65.77503967285156, 77.56488037109375, -12636.5615234375)
-            elseif Lv >= 2375 or SelectMonster == "Candy Rebel [Lv. 2375]" then
+            elseif Lv == 2375 or Lv <= 2400 or SelectMonster == "Candy Rebel [Lv. 2375]" then
 			Ms = "Candy Rebel [Lv. 2375]"
 			NameQuest = "ChocQuest2"
 			QuestLv = 2
 			NameMon = "Candy Rebel"
 			CFrameQ = CFrame.new(151.198, 24.8907, -12774.6)
 			CFrameMon = CFrame.new(59.33293914794922, 64.40779876708984, -12892.9638671875)
+            elseif Lv == 2400 or Lv <= 2425 or SelectMonster == "Candy Pirate [Lv. 2400]" then
+			Ms = "Candy Pirate [Lv. 2400]"
+			NameQuest = "CandyQuest1"
+			QuestLv = 1
+			NameMon = "Candy Pirate"
+			CFrameQ = CFrame.new(-1148.8192138671875, 22.378950119018555, -14445.7177734375)
+			CFrameMon = CFrame.new(-1345.212890625, 139.2557830810547, -14497.9052734375)
+            elseif Lv >= 2450 or SelectMonster == "Snow Demon [Lv. 2425]" then
+			Ms = "Snow Demon [Lv. 2425]"
+			NameQuest = "CandyQuest1"
+			QuestLv = 2
+			NameMon = "Snow Demon"
+			CFrameQ = CFrame.new(-1148.8192138671875, 22.378950119018555, -14445.7177734375)
+			CFrameMon = CFrame.new(-844.89501953125, 139.89016723632812, -14497.513671875)
 		end
 	end
 end
@@ -1829,6 +1843,9 @@ function autofarm()
                     repeat game:GetService("RunService").Stepped:wait()
                         if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                             EquipWeapon(SelectToolWeapon)
+                            if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+                            end
                             v.HumanoidRootPart.CanCollide = false
                             v.Head.CanCollide = false
                             v.Humanoid:ChangeState(11)
@@ -1845,7 +1862,7 @@ function autofarm()
                 end
             end
         else
-            TP2(CFrameMon * CFrame.new(0,45,0))
+            TP2(CFrameMon)
             CheckLevel()
             Fast_Delay = false
             Magnet = false
@@ -1873,6 +1890,9 @@ function autofarm2()
                             if game:GetService("Workspace").Enemies:GetChildren(Ms) then
                                 if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
                                     EquipWeapon(SelectToolWeapon)
+                                    if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+                                    end
                                     v.Humanoid:ChangeState(11)
                                     v.HumanoidRootPart.CanCollide = false
                                     cframemon = v.HumanoidRootPart.CFrame
@@ -1899,7 +1919,7 @@ function autofarm2()
                 end
             else
                 CheckLevel()
-                TP2(CFrameMon * CFrame.new(0,45,0))
+                TP2(CFrameMon)
                 Fast_Delay = false
                 Magnet = false
             end
@@ -2391,7 +2411,7 @@ if OldWorld then
 elseif NewWorld then
     SelectMonFarm = {"Default","Raider [Lv. 700]","Mercenary [Lv. 725]","Swan Pirate [Lv. 775]","Factory Staff [Lv. 800]","Marine Lieutenant [Lv. 875]","Marine Captain [Lv. 900]","Zombie [Lv. 950]","Vampire [Lv. 975]","Snow Trooper [Lv. 1000]","Winter Warrior [Lv. 1050]","Lab Subordinate [Lv. 1100]","Horned Warrior [Lv. 1125]","Magma Ninja [Lv. 1175]","Lava Pirate [Lv. 1200]","Ship Deckhand [Lv. 1250]","Ship Engineer [Lv. 1275]","Ship Steward [Lv. 1300]","Ship Officer [Lv. 1325]","Arctic Warrior [Lv. 1350]","Snow Lurker [Lv. 1375]","Sea Soldier [Lv. 1425]","Water Fighter [Lv. 1450]"}
 elseif ThreeWorld then
-    SelectMonFarm = {"Default","Pirate Millionaire [Lv. 1500]","Pistol Billionaire [Lv. 1525]" ,"Dragon Crew Warrior [Lv. 1575]", "Dragon Crew Archer [Lv. 1600]","Female Islander [Lv. 1625]","Giant Islander [Lv. 1650]","Marine Commodore [Lv. 1700]","Marine Rear Admiral [Lv. 1725]","Fishman Raider [Lv. 1775]","Fishman Captain [Lv. 1800]","Forest Pirate [Lv. 1825]","Mythological Pirate [Lv. 1850]","Jungle Pirate [Lv. 1900]","Musketeer Pirate [Lv. 1925]","Reborn Skeleton [Lv. 1975]","Living Zombie [Lv. 2000]","Demonic Soul [Lv. 2025]","Posessed Mummy [Lv. 2050]","Peanut Scout [Lv. 2075]","Peanut President [Lv. 2100]","Ice Cream Chef [Lv. 2125]","Ice Cream Commander [Lv. 2150]","Cookie Crafter [Lv. 2200]","Cake Guard [Lv. 2225]","Baking Staff [Lv. 2250]","Head Baker [Lv. 2275]","Cocoa Warrior [Lv. 2300]","Chocolate Bar Battler [Lv. 2325]","Sweet Thief [Lv. 2350]","Candy Rebel [Lv. 2375]"}
+    SelectMonFarm = {"Default","Pirate Millionaire [Lv. 1500]","Pistol Billionaire [Lv. 1525]" ,"Dragon Crew Warrior [Lv. 1575]", "Dragon Crew Archer [Lv. 1600]","Female Islander [Lv. 1625]","Giant Islander [Lv. 1650]","Marine Commodore [Lv. 1700]","Marine Rear Admiral [Lv. 1725]","Fishman Raider [Lv. 1775]","Fishman Captain [Lv. 1800]","Forest Pirate [Lv. 1825]","Mythological Pirate [Lv. 1850]","Jungle Pirate [Lv. 1900]","Musketeer Pirate [Lv. 1925]","Reborn Skeleton [Lv. 1975]","Living Zombie [Lv. 2000]","Demonic Soul [Lv. 2025]","Posessed Mummy [Lv. 2050]","Peanut Scout [Lv. 2075]","Peanut President [Lv. 2100]","Ice Cream Chef [Lv. 2125]","Ice Cream Commander [Lv. 2150]","Cookie Crafter [Lv. 2200]","Cake Guard [Lv. 2225]","Baking Staff [Lv. 2250]","Head Baker [Lv. 2275]","Cocoa Warrior [Lv. 2300]","Chocolate Bar Battler [Lv. 2325]","Sweet Thief [Lv. 2350]","Candy Rebel [Lv. 2375]","Candy Pirate [Lv. 2400]","Snow Demon [Lv. 2425]"}
 end
 
 tap1:AddToggle("Auto Farm ( Select )", _G.Setting.FarmSelectMon, function(v)
@@ -2522,11 +2542,11 @@ end
 function AttackNoCD(Num)
     if Num == 1 then
         local AC = CbFw2.activeController
-        for i = 1,1 do tick()
+        for i = 1,1 do 
             local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
                 plr.Character,
                 {plr.Character.HumanoidRootPart},
-                60
+                55
             )
             local cac = {}
             local hash = {}
@@ -2566,11 +2586,11 @@ function AttackNoCD(Num)
         end
     elseif Num == 0 then
         local AC = CbFw2.activeController
-        for i = 1,1 do tick()
+        for i = 1,1 do 
             local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
                 plr.Character,
                 {plr.Character.HumanoidRootPart},
-                60
+                55
             )
             local cac = {}
             local hash = {}
@@ -2600,8 +2620,7 @@ function AttackNoCD(Num)
                                     CombatFrameworkR.activeController.timeToNextBlock = tick()
                                     CombatFrameworkR.activeController.timeToNextAttack = tick()
                                     game:GetService("VirtualUser"):CaptureController()
-                                    game:GetService("VirtualUser"):ClickButton1(Vector2.new(1300,760), game:GetService("Workspace").Camera.CFrame)
-                                    AC.animator.anims.basic[1]:Play(0.01,0.025,0.035)
+                                    game:GetService("VirtualUser"):ClickButton1(Vector2.new(1300,760))
                                 end
                             end)
                         end
@@ -2633,20 +2652,28 @@ spawn(function()
             local Hits = STOPRL.getBladeHits(b,c,d)
             if Hits then
                 STOP.play = function() end
-                a:Play(0.01,0.025,0.035)
+                a:Play(0.01,0.01,0.01)
                 func(Hits)
                 STOP.play = shared.cpc
-                wait(0.35)
+                task.wait(0.1)
                 a:Stop()
-            end
+            end         
+            if Hits then
+                STOP.play = function() end
+                a:Play(0.01,0.01,0.01)
+                func(Hits)
+                STOP.play = shared.cpc
+                task.wait(0.1)
+                a:Stop()
+            end      
         end
     end)
 end)
 
 spawn(function()
-    while task.wait() do 
+    while true do task.wait() 
         pcall(function()
-            if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and Fast_Delay and Fast_Delay_Click_Custom  then
+            if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and Fast_Delay and Fast_Delay_Click_Custom then
                 AttackNoCD(0)
             end
             if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and DAFast then
@@ -2656,14 +2683,13 @@ spawn(function()
     end
 end)
 
-b2 = tick()
+b2 = tick() or tick()
 spawn(function()
     while wait(FastWait) do
-        if b2 - tick() > 0.75 then
+        if b2 - tick() > .75 then
             wait(0.001)
             b2 = tick()
         end
-        tick()
         pcall(function()
             if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and Fast_Delay and Fast_Delay_Click_Custom then
                 AttackNoCD(1)
@@ -2701,21 +2727,17 @@ spawn(function()
         end)
     end
 end)
-
 if FastWait == nil then
-    FastWait = .125
+    FastWait = .150
 end
 
-tap1:AddDropdown("Fast Attack [ Mode ]", {"V.0.5","V.1","V.2"}, function(v)
-    if v == "V.0.5" then
-        FastWait = .125
-        warn("FastAttack [ V 0.5 ]")
-    elseif v == "V.1" then
-        FastWait = .1
-        warn("FastAttack [ V 1 ]")
-    elseif v == "V.2" then
-        FastWait = -1
-        warn("FastAttack [ V 2 ]")
+tap1:AddDropdown("Fast Attack Mode ", {"Default", "Ultra", "Extra"}, function(v)
+    if v == "Default" then
+        FastWait = .150  
+    elseif v == "Ultra" then
+        FastWait = .01
+    elseif v == "Extra" then
+        FastWait = 1 / 0 / 1 / 0 / 1 / 0 / 1 / 0
     else
         error("FastAttack Error")
     end
@@ -3595,6 +3617,9 @@ function tweenTP()
                 ByPass(CFrame.new(-1862.953857421875, 40.08573532104492, -11810.9052734375))
             elseif TweenNameMap == "Sea of treats" then
                 ByPass(CFrame.new(226.3279571533203, 37.14205551147461, -12237.6240234375))
+            elseif TweenNameMap == "New island" then
+                ByPass(CFrame.new(-1078.72607421875, 16.64043426513672, -14476.9814453125))
+
             elseif TweenNameMap == "Lab" then
                 ByPass(CFrame.new(-5057.146484375, 314.54132080078, -2934.7995605469))
             elseif TweenNameMap == "MysticIsland" then
@@ -3889,6 +3914,12 @@ end)
 
 tap8:AddToggle("White Screen", _G.Setting.WhiteScreen, function(v)
     White_Screen = v
+    wait(.25)
+    if v == false then 
+        game:GetService("RunService"):Set3dRenderingEnabled(true)
+        pcall(setfpscap(2000))
+        game.Lighting.FogEnd = 2500
+    end
 end)
 
 
@@ -3896,14 +3927,12 @@ spawn(function()
     while wait(.1) do
         pcall(function()
             if White_Screen then
-                game.Lighting.FogEnd = math.huge
-                if game:GetService("Lighting"):FindFirstChild("FantasySky") then game:GetService("Lighting").FantasySky:Destroy() end
-                game:GetService("RunService"):Set3dRenderingEnabled(false)
-                pcall(setfpscap(30))
-            else
-                game:GetService("RunService"):Set3dRenderingEnabled(true)
-                pcall(setfpscap(60))
-                game.Lighting.FogEnd = 2500
+                if White_Screen then
+                    game.Lighting.FogEnd = math.huge
+                    if game:GetService("Lighting"):FindFirstChild("FantasySky") then game:GetService("Lighting").FantasySky:Destroy() end
+                    game:GetService("RunService"):Set3dRenderingEnabled(false)
+                    pcall(setfpscap(30))
+                end
             end
         end)
     end
