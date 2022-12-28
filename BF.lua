@@ -48,14 +48,13 @@ _G.Setting = {
     Haki = true     ,
     DamageCounter = true
 }
-
-do local gui = game:GetService("CoreGui"):FindFirstChild("HovxrzGui") 
-    if gui then 
-        gui:Destroy()
-        game.Players.LocalPlayer:kick("Bro????????????")
-    end 
+if _G.Setting == nil then
+    error("Setting Error")
 end
 
+repeat wait() until game.Players.LocalPlayer
+repeat wait() until game.Players
+repeat wait() until game
 repeat wait()
 	if game.Players.LocalPlayer.Team == nil and game:GetService("Players")["LocalPlayer"].PlayerGui.Main.ChooseTeam.Visible == true then
 		if _G.SelectTeam == "Pirate" then
@@ -93,6 +92,13 @@ elseif placeId == 4442272183 then
     NewWorld = true
 elseif placeId == 7449423635 then
 	ThreeWorld = true
+end
+
+do local gui = game:GetService("CoreGui"):FindFirstChild("HovxrzGui") 
+    if gui then 
+        gui:Destroy()
+        game.Players.LocalPlayer:kick("Bro????????????")
+    end 
 end
 
 local UserInputService = game:GetService("UserInputService")
@@ -1144,6 +1150,7 @@ spawn(function()
 end)
 
 local Library = library:CreateWindow("LOCKER      ", Color3.fromRGB(155,155,255), "       Blox Fruits            ")
+repeat wait() until game:IsLoaded()
 local tap1 = Library:AddTab("Farm Level")
 
 tap1:AddSeperator("ToggleGui : RightControl")
@@ -1946,6 +1953,26 @@ task.spawn(function()
 	end
 end)
 
+--[[task.spawn(function()
+	while wait(.1) do
+        pcall(function()
+            wait(.1)
+                CFrame.new(0,30,0) 
+            wait(.1)
+                CFrame.new(0,0,-30) 
+            wait(.1)
+                CFrame.new(30,0,0)
+            wait(.1)
+                CFrame.new(0,0,-30)
+            wait(.1)
+                CFrame.new(-30,0,0)
+            wait(.1)
+                CFrame.new(0,0,-25)
+            wait(.1)
+	    end)
+    end
+end)]]
+
 spawn(function()
     while task.wait() do
         pcall(function()
@@ -2002,6 +2029,20 @@ spawn(function()
                                         v.Head.CanCollide = false
                                         v.HumanoidRootPart.CanCollide = false
                                         v.HumanoidRootPart.CFrame = cframemon
+                                        if v.Humanoid:FindFirstChild("Animator") then
+                                            v.Humanoid.Animator:Destroy()
+                                        end
+                                    end)
+                                end
+                            end
+                        end
+                        if AutoCandy then
+                            if (v.Name == "Candy Pirate [Lv. 2400]" or v.Name == "Snow Demon [Lv. 2425]") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                if (v.HumanoidRootPart.Position - Candy.Position).Magnitude < 300 then
+                                    pcall(function()
+                                        v.Head.CanCollide = false
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.HumanoidRootPart.CFrame = Candy
                                         if v.Humanoid:FindFirstChild("Animator") then
                                             v.Humanoid.Animator:Destroy()
                                         end
@@ -2209,6 +2250,8 @@ spawn(function()
             function UseCode(Text)
                 game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(Text)
             end
+            task.wait()
+            UseCode("GAMER_ROBOT_1M")
             UseCode("ADMINGIVEAWAY")
             UseCode("GAMERROBOT_YT")
             UseCode("kittgaming")
@@ -2218,15 +2261,14 @@ spawn(function()
             UseCode("JCWK")
             UseCode("Starcodeheo")
             UseCode("Bluxxy")
-            UseCode("fudd10_v2")
-            UseCode("THEGREATACE")
             UseCode("SUB2GAMERROBOT_EXP1")
-            UseCode("Sub2OfficialNoobie")
-            UseCode("StrawHatMaine")
-            UseCode("SUB2NOOBMASTER123")
+            UseCode("Sub2NoobMaster123")
             UseCode("Sub2Daigrock")
             UseCode("Axiore")
             UseCode("TantaiGaming")
+            UseCode("StrawHatMaine")
+            UseCode("Sub2OfficialNoobie")
+            UseCode("TheGreatAce")
         end
     end
 end)
@@ -2234,7 +2276,7 @@ end)
 spawn(function()
     pcall(function()
         while task.wait() do 
-            if TweenTpRaid or V1 or TPPos or NextIsland or Auto_Bone or New_World or autofarmV1 or AutoFarmSelectMon or atoMoB then
+            if TweenTpRaid or AutoCandy or V1 or TPPos or NextIsland or Auto_Bone or New_World or autofarmV1 or AutoFarmSelectMon or atoMoB then
                 if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                     local BodyV = Instance.new("BodyVelocity")
                     BodyV.Name = "BodyClip"
@@ -2253,7 +2295,7 @@ end)
 
 spawn(function()
     game:GetService("RunService").Stepped:Connect(function() 
-        if V1 or TPPos or NextIsland or NoClip_Toggle or Auto_Bone or New_World or autofarmV1 or AutoFarmSelectMon or atoMoB then
+        if V1 or AutoCandy or TPPos or NextIsland or NoClip_Toggle or Auto_Bone or New_World or autofarmV1 or AutoFarmSelectMon or atoMoB then
             for _, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
                 if v:IsA("BasePart") then
                     v.CanCollide = false    
@@ -2481,7 +2523,7 @@ local DropWeaponMain = tap1:AddDropdown("Weapon [ Main Farm ]", Weapon, function
     wait(.1)
     game.StarterGui:SetCore("SendNotification", {
         Title = "Notification System", 
-        Text = "Select Weapon [ Main ]: \n".. tostring(v) .. "✅",
+        Text = "Select Weapon [ Main ]: \n".. tostring(v) .. "",
         Duration = 10
     })
 end)
@@ -2490,7 +2532,7 @@ local DropWeaponMisc = tap1:AddDropdown("Weapon [ More Farm ]", Weapon or _G.Set
     SelectToolWeaponMisc = v
     game.StarterGui:SetCore("SendNotification", {
         Title = "Notification System", 
-        Text = "Select Weapon [ Misc ]: \n".. tostring(v) .. "✅",
+        Text = "Select Weapon [ Misc ]: \n".. tostring(v) .. "",
         Duration = 10
     })
 end)
@@ -2516,6 +2558,8 @@ end)
 
 tap1:AddSeperator("Setting Farm")
 
+repeat wait() until game.Players.LocalPlayer.PlayerScripts.CombatFramework
+
 spawn(function()
     pcall(function()
         while task.wait() do
@@ -2533,7 +2577,16 @@ local CbFw = debug.getupvalues(require(game.Players.LocalPlayer.PlayerScripts.Co
 local CbFw2 = CbFw[2]
 require(game.ReplicatedStorage.Util.CameraShaker):Stop()
 
-function GetCurrentBlade() 
+if true or false then
+    if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
+        game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
+    end
+    if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
+        game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
+    end
+end
+
+function GetBlade() 
     local p13 = CbFw2.activeController
     local ret = p13.blades[1]
     if not ret then 
@@ -2543,14 +2596,6 @@ function GetCurrentBlade()
         ret = ret.Parent 
     end
     return ret
-end
-
-if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
-	game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
-end
-
-if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
-	game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
 end
 
 function AttackNoCD(Num)
@@ -2590,8 +2635,8 @@ function AttackNoCD(Num)
                 debug.setupvalue(AC.attack, 7, u10)
                 pcall(function()
                     if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then
-                        AC.animator.anims.basic[1]:Play(0.01,0.025,0.035)
-                        game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
+                        AC.animator.anims.basic[1]:Play(0.001,0.001,0.001)
+                        game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBlade()))
                         game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
                         game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "")
                     end
@@ -2617,6 +2662,10 @@ function AttackNoCD(Num)
             bladehit = cac
             if #bladehit > 0 then
                 if game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Character:FindFirstChild("Black Leg").Level.Value >= 150 then
+                    game:service('VirtualInputManager'):SendKeyEvent(true, "V", false, game)
+                    game:service('VirtualInputManager'):SendKeyEvent(false, "V", false, game)
+                end
+                if game.Players.LocalPlayer.Character:FindFirstChild("Death Step") and game.Players.LocalPlayer.Character:FindFirstChild("Death Step").Level.Value >= 150 then
                     game:service('VirtualInputManager'):SendKeyEvent(true, "V", false, game)
                     game:service('VirtualInputManager'):SendKeyEvent(false, "V", false, game)
                 end
@@ -2662,18 +2711,20 @@ spawn(function()
             local Hits = STOPRL.getBladeHits(b,c,d)
             if Hits then
                 STOP.play = function() end
-                a:Play(0.01,0.01,0.01)
+                a:Play(0.001,0.001,0.001)
+                func(Hits)                
                 func(Hits)
                 STOP.play = shared.cpc
-                task.wait(0.1)
+                wait(0.5)
                 a:Stop()
             end         
             if Hits then
                 STOP.play = function() end
-                a:Play(0.01,0.01,0.01)
+                a:Play(0.001,0.001,0.001)
+                func(Hits)
                 func(Hits)
                 STOP.play = shared.cpc
-                task.wait(0.1)
+                wait(0.5)
                 a:Stop()
             end      
         end
@@ -2681,30 +2732,64 @@ spawn(function()
 end)
 
 spawn(function()
-    while true do task.wait() 
+    game:GetService("RunService").Stepped:Connect(function()
+        STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
+            local Hits = STOPRL.getBladeHits(b,c,d)
+            if Hits then
+                STOP.play = function() end
+                a:Play(0.001,0.001,0.001)
+                func(Hits)
+                func(Hits)
+                STOP.play = shared.cpc
+                wait(0.5)
+                a:Stop()
+            end         
+            if Hits then
+                STOP.play = function() end
+                a:Play(0.001,0.001,0.001)
+                func(Hits)
+                func(Hits)
+                STOP.play = shared.cpc
+                wait(0.5)
+                a:Stop()
+            end      
+        end
+    end)
+end)
+
+spawn(function()
+    while task.wait() do 
         pcall(function()
-            if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and Fast_Delay and Fast_Delay_Click_Custom then
-                AttackNoCD(0)
-            end
-            if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and DAFast then
-                AttackNoCD(0)
+            if true or false then
+                if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and Fast_Delay and Fast_Delay_Click_Custom then
+                    AttackNoCD(0)
+                end
+                if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and DAFast then
+                    AttackNoCD(0)
+                end
             end
         end)
     end
 end)
 
-b2 = tick() or tick()
+b2 = tick()
 spawn(function()
     while wait(FastWait) do
-        if b2 - tick() > .75 then
-            wait(0.001)
+        if b2 - tick() > 1 then
+            wait(0.01)
             b2 = tick()
         end
         pcall(function()
             if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and Fast_Delay and Fast_Delay_Click_Custom then
+                if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+                end
                 AttackNoCD(1)
             end
             if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and DAFast then
+                if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+                end
                 AttackNoCD(1)
             end
         end)
@@ -2715,6 +2800,9 @@ spawn(function()
     while wait(0.5) do 
         pcall(function()
             if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and Fast_Delay_Click_Custom and Fast_Delay == false and DAFast == false then
+                if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+                end
                 AttackNoCD(1)
             end
         end)
@@ -2739,15 +2827,15 @@ spawn(function()
 end)
 
 if FastWait == nil then
-    FastWait = .150
+    FastWait = .1
 end
 
-tap1:AddDropdown("Fast Attack Mode ", {"Default", "Ultra", "Extra"}, function(v)
-    if v == "Default" then
-        FastWait = .150  
-    elseif v == "Ultra" then
-        FastWait = .01
+tap1:AddDropdown("Fast Attack Mode ", {"Ultra", "Extra", "The Best"}, function(v)
+    if v == "Ultra" then
+        FastWait = .1
     elseif v == "Extra" then
+        FastWait = math.random(-9999,0)
+    elseif v == "The Best" then
         FastWait = 1 / 0 / 1 / 0 / 1 / 0 / 1 / 0
     else
         error("FastAttack Error")
@@ -2782,6 +2870,145 @@ end)
 
 tap1:AddToggle("Buy Abilities", _G.Setting.Abilities, function(v)
     Abilities = v
+end)
+
+tap1:AddSeperator("Event Candy")
+
+function Candy()
+    pcall(function()
+        if (game:GetService("ReplicatedStorage"):FindFirstChild("Candy Pirate [Lv. 2400]") or game:GetService("ReplicatedStorage"):FindFirstChild("Snow Demon [Lv. 2425]") or game:GetService("Workspace").Enemies:FindFirstChild("Candy Pirate [Lv. 2400]") or game:GetService("Workspace").Enemies:FindFirstChild("Snow Demon [Lv. 2425]")) then
+            for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+                if (v.Name == "Candy Pirate [Lv. 2400]" or v.Name == "Snow Demon [Lv. 2425]") then 
+                    if v.Humanoid.Health > 0 then
+                        repeat wait()
+                            pcall(function()
+                                EquipWeaponMisc(SelectToolWeaponMisc)
+                                Candy = v.HumanoidRootPart.CFrame
+                                TP(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
+                                v.Humanoid:ChangeState(11)
+                                v.Head.CanCollide = false
+                                Fast_Delay = true 
+                            end)
+                        until AutoCandy == false or v.Humanoid.Health <= 0 or not v.Parent
+                    end
+                end
+            end
+            for i,v in pairs(game.ReplicatedStorage:GetChildren()) do
+                if (v.Name == "Candy Pirate [Lv. 2400]" or v.Name == "Snow Demon [Lv. 2425]") then 
+                    if v.Humanoid.Health > 0 then
+                        repeat wait()
+                            pcall(function()
+                                EquipWeaponMisc(SelectToolWeaponMisc)
+                                Candy = v.HumanoidRootPart.CFrame
+                                TP(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
+                                v.Humanoid:ChangeState(11)
+                                v.Head.CanCollide = false
+                                Fast_Delay = true 
+                            end)
+                        until AutoCandy == false or v.Humanoid.Health <= 0 or not v.Parent
+                    end
+                end
+            end
+        else
+            TP(CFrame.new(-1009.43603515625, 58.17081069946289, -14349.9697265625))
+            Fast_Delay = false
+        end
+    end)
+end
+
+spawn(function()
+    while wait(.1) do
+        pcall(function()
+            if AutoCandy then
+                Candy()
+            end
+        end)
+    end
+end)
+
+tap1:AddToggle("Auto Candy", false, function(v)
+    if SelectToolWeaponMisc == "" or SelectToolWeaponMisc == nil then
+         game.StarterGui:SetCore("SendNotification", {
+            Title = "Notification System", 
+            Text = "Select Weapon Please: ✅",
+            Duration = 25
+        })
+    else
+        AutoCandy = v
+    end
+    if v == false then
+        wait(.5)
+        Fast_Delay = false
+        game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible = false
+        TP2(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+        TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+    end
+end)
+
+tap1:AddSeperator("Buy & Shop Event")
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if Abilities_Event1 then
+                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+                Event:InvokeServer("Candies", "Buy", 1, 1)
+            end
+            if Abilities_Event2 then
+                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+                Event:InvokeServer("Candies", "Buy", 2, 1)
+            end
+            if Abilities_Event3 then
+                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+                Event:InvokeServer("Candies", "Buy", 2, 2)
+            end
+        end)
+    end
+end)
+
+tap1:AddToggle("Auto Buy Exp X2 [ 50 Candy ]", false, function(v)
+    Abilities_Event1 = v
+end)
+
+tap1:AddToggle("Auto Trade 200 F [ 50 Candy ]", false, function(v)
+    Abilities_Event2 = v
+end)
+
+tap1:AddToggle("Auto Trade 500 F [ 100 Candy ]", false, function(v)
+    Abilities_Event3 = v
+end)
+
+tap1:AddLine()
+
+tap1:AddButton("Stats Refund [ 50 Candy ]", function()
+    function Event_ReStats_Button()
+        local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+        Event:InvokeServer("Candies", "Buy", 1, 2)
+    end
+    Event_ReStats_Button()
+end)
+
+tap1:AddButton("Race Reroll [ 100 Candy ]", function()
+    function Event_ReRace_Button()
+        local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+        Event:InvokeServer("Candies", "Buy", 1, 3)
+    end
+    Event_ReRace_Button()
+end)
+
+tap1:AddSeperator("Meme")
+
+tap1:AddButton("Rick Roll", function()
+    local Music = "1544291808"
+    function Rickroll()
+        local Sound = Instance.new("Sound")
+        Sound.Name = "RickRoll"
+        Sound.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+        Sound.SoundId = "rbxassetid://" .. Music
+        Sound.Volume = 1.5
+        Sound:Play()
+    end
+    Rickroll()
 end)
 
 local tap2 = Library:AddTab("More Farm")
@@ -2819,26 +3046,6 @@ function Cake1()
     pcall(function()
         if (game:GetService("Workspace").Enemies:FindFirstChild("Head Baker [Lv. 2275]") or game:GetService("Workspace").Enemies:FindFirstChild("Baking Staff [Lv. 2250]") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Guard [Lv. 2225]") or game:GetService("Workspace").Enemies:FindFirstChild("Cookie Crafter [Lv. 2200]")) or (game.ReplicatedStorage:FindFirstChild("Head Baker [Lv. 2275]") or game.ReplicatedStorage:FindFirstChild("Baking Staff [Lv. 2250]") or game.ReplicatedStorage:FindFirstChild("Cake Guard [Lv. 2225]") or game.ReplicatedStorage:FindFirstChild("Cookie Crafter [Lv. 2200]")) then
             for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-                if (v.Name == "Head Baker [Lv. 2275]" or v.Name == "Baking Staff [Lv. 2250]" or v.Name == "Cake Guard [Lv. 2225]" or v.Name == "Cookie Crafter [Lv. 2200]") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then 
-                    if v.Humanoid.Health > 0 then
-                        repeat wait()
-                            pcall(function()
-                                if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
-                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
-                                end
-                                EquipWeaponMisc(SelectToolWeaponMisc)
-                                Ato500 = v.HumanoidRootPart.CFrame
-                                TP(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
-                                v.Humanoid:ChangeState(11)
-                                v.Head.CanCollide = false
-                                Fast_Delay = true
-                                MagnetActive500 = true                                      
-                            end)
-                        until atoMoB == false or v.Humanoid.Health <= 0 or not v.Parent
-                    end
-                end
-            end
-            for i,v in pairs(game.ReplicatedStorage:GetChildren()) do
                 if (v.Name == "Head Baker [Lv. 2275]" or v.Name == "Baking Staff [Lv. 2250]" or v.Name == "Cake Guard [Lv. 2225]" or v.Name == "Cookie Crafter [Lv. 2200]") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then 
                     if v.Humanoid.Health > 0 then
                         repeat wait()
@@ -3434,6 +3641,7 @@ elseif ThreeWorld then
         "Peanut Island",
         "Cookie Island",
         "Sea of treats",
+        "New island",
         "Lab",
         "MysticIsland"
     }
@@ -3630,7 +3838,6 @@ function tweenTP()
                 ByPass(CFrame.new(226.3279571533203, 37.14205551147461, -12237.6240234375))
             elseif TweenNameMap == "New island" then
                 ByPass(CFrame.new(-1078.72607421875, 16.64043426513672, -14476.9814453125))
-
             elseif TweenNameMap == "Lab" then
                 ByPass(CFrame.new(-5057.146484375, 314.54132080078, -2934.7995605469))
             elseif TweenNameMap == "MysticIsland" then
