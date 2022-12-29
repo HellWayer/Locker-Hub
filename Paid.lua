@@ -5,6 +5,9 @@ token = "LwhofAJMuwygWshJr2hrfy7bXIrTqog9fQqNepVTD8cBbIHKs6iu2FgtDxLoBsA7LRY9"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/HellWayer/Hellwey/main/api.lua", true))()
 if placeId == 2753915549 or placeId == 4442272183 or placeId == 7449423635 then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/HellWayer/Locker-Hub/main/BF.lua"))()
+    game:GetService("ReplicatedStorage").Util.Sound.Storage.Ope.RadioKnife.SwordSwing:Destroy()
+    game:GetService("ReplicatedStorage").Util.Sound.Storage.Swing:Destroy()
+    game:GetService("ReplicatedStorage").Util.Sound.Storage.Lazy.Hit1:Destroy()
 elseif placeId == 2788229376 then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/HellWayer/Locker-Hub/main/Dahood.lua"))()
 else
