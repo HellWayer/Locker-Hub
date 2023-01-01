@@ -1,4 +1,4 @@
---[[local placeId = game.PlaceId
+local placeId = game.PlaceId
 Key = "IT_LOCKER_HUB";
 Id = "1056892681600634921";
 token = "LwhofAJMuwygWshJr2hrfy7bXIrTqog9fQqNepVTD8cBbIHKs6iu2FgtDxLoBsA7LRY9";
@@ -12,4 +12,4 @@ elseif placeId == 2788229376 then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/HellWayer/Locker-Hub/main/Dahood.lua"))()
 else
     game.Players.LocalPlayer:kick("\n\nMap Not Support\n")
-end]]
+end
