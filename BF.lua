@@ -2665,7 +2665,7 @@ function AttackNoCD(Num)
                     game:service('VirtualInputManager'):SendKeyEvent(true, "V", false, game)
                     game:service('VirtualInputManager'):SendKeyEvent(false, "V", false, game)
                 end
-                if game.Players.LocalPlayer.Character:FindFirstChild("Death Step") and game.Players.LocalPlayer.Character:FindFirstChild("Death Step").Level.Value >= 150 then
+                if game.Players.LocalPlayer.Character:FindFirstChild("Death Step") and game.Players.LocalPlayer.Character:FindFirstChild("Death Step").Level.Value >= 400 then
                     game:service('VirtualInputManager'):SendKeyEvent(true, "V", false, game)
                     game:service('VirtualInputManager'):SendKeyEvent(false, "V", false, game)
                 end
@@ -2706,55 +2706,46 @@ if not shared.cpc then
 end
 
 spawn(function()
-    game:GetService("RunService").Stepped:Connect(function()
+    while task.wait() do
         STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
             local Hits = STOPRL.getBladeHits(b,c,d)
             if Hits then
                 STOP.play = function() end
-                a:Play(0.001,0.001,0.001)
+                a:Play(15.25,15.25,15.25)
                 func(Hits)                
-                func(Hits)
                 STOP.play = shared.cpc
                 wait(0.5)
                 a:Stop()
             end         
             if Hits then
                 STOP.play = function() end
-                a:Play(0.001,0.001,0.001)
-                func(Hits)
+                a:Play(15.25,15.25,15.25)
                 func(Hits)
                 STOP.play = shared.cpc
                 wait(0.5)
                 a:Stop()
             end      
         end
-    end)
-end)
-
-spawn(function()
-    game:GetService("RunService").Stepped:Connect(function()
         STOPRL.wrapAttackAnimationAsync = function(a,b,c,d,func)
             local Hits = STOPRL.getBladeHits(b,c,d)
             if Hits then
                 STOP.play = function() end
-                a:Play(0.001,0.001,0.001)
-                func(Hits)
-                func(Hits)
+                a:Play(15.25,15.25,15.25)
+                func(Hits)                
                 STOP.play = shared.cpc
                 wait(0.5)
                 a:Stop()
             end         
             if Hits then
                 STOP.play = function() end
-                a:Play(0.001,0.001,0.001)
-                func(Hits)
+                a:Play(15.25,15.25,15.25)
                 func(Hits)
                 STOP.play = shared.cpc
                 wait(0.5)
                 a:Stop()
             end      
         end
-    end)
+    end
 end)
 
 spawn(function()
@@ -2870,145 +2861,6 @@ end)
 
 tap1:AddToggle("Buy Abilities", _G.Setting.Abilities, function(v)
     Abilities = v
-end)
-
-tap1:AddSeperator("Event Candy")
-
-function Candy()
-    pcall(function()
-        if (game:GetService("ReplicatedStorage"):FindFirstChild("Candy Pirate [Lv. 2400]") or game:GetService("ReplicatedStorage"):FindFirstChild("Snow Demon [Lv. 2425]") or game:GetService("Workspace").Enemies:FindFirstChild("Candy Pirate [Lv. 2400]") or game:GetService("Workspace").Enemies:FindFirstChild("Snow Demon [Lv. 2425]")) then
-            for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-                if (v.Name == "Candy Pirate [Lv. 2400]" or v.Name == "Snow Demon [Lv. 2425]") then 
-                    if v.Humanoid.Health > 0 then
-                        repeat wait()
-                            pcall(function()
-                                EquipWeaponMisc(SelectToolWeaponMisc)
-                                Candy = v.HumanoidRootPart.CFrame
-                                TP(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
-                                v.Humanoid:ChangeState(11)
-                                v.Head.CanCollide = false
-                                Fast_Delay = true 
-                            end)
-                        until AutoCandy == false or v.Humanoid.Health <= 0 or not v.Parent
-                    end
-                end
-            end
-            for i,v in pairs(game.ReplicatedStorage:GetChildren()) do
-                if (v.Name == "Candy Pirate [Lv. 2400]" or v.Name == "Snow Demon [Lv. 2425]") then 
-                    if v.Humanoid.Health > 0 then
-                        repeat wait()
-                            pcall(function()
-                                EquipWeaponMisc(SelectToolWeaponMisc)
-                                Candy = v.HumanoidRootPart.CFrame
-                                TP(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
-                                v.Humanoid:ChangeState(11)
-                                v.Head.CanCollide = false
-                                Fast_Delay = true 
-                            end)
-                        until AutoCandy == false or v.Humanoid.Health <= 0 or not v.Parent
-                    end
-                end
-            end
-        else
-            TP(CFrame.new(-1009.43603515625, 58.17081069946289, -14349.9697265625))
-            Fast_Delay = false
-        end
-    end)
-end
-
-spawn(function()
-    while wait(.1) do
-        pcall(function()
-            if AutoCandy then
-                Candy()
-            end
-        end)
-    end
-end)
-
-tap1:AddToggle("Auto Candy", false, function(v)
-    if SelectToolWeaponMisc == "" or SelectToolWeaponMisc == nil then
-         game.StarterGui:SetCore("SendNotification", {
-            Title = "Notification System", 
-            Text = "Select Weapon Please: ✅",
-            Duration = 25
-        })
-    else
-        AutoCandy = v
-    end
-    if v == false then
-        wait(.5)
-        Fast_Delay = false
-        game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible = false
-        TP2(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
-        TP(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
-    end
-end)
-
-tap1:AddSeperator("Buy & Shop Event")
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if Abilities_Event1 then
-                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
-                Event:InvokeServer("Candies", "Buy", 1, 1)
-            end
-            if Abilities_Event2 then
-                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
-                Event:InvokeServer("Candies", "Buy", 2, 1)
-            end
-            if Abilities_Event3 then
-                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
-                Event:InvokeServer("Candies", "Buy", 2, 2)
-            end
-        end)
-    end
-end)
-
-tap1:AddToggle("Auto Buy Exp X2 [ 50 Candy ]", false, function(v)
-    Abilities_Event1 = v
-end)
-
-tap1:AddToggle("Auto Trade 200 F [ 50 Candy ]", false, function(v)
-    Abilities_Event2 = v
-end)
-
-tap1:AddToggle("Auto Trade 500 F [ 100 Candy ]", false, function(v)
-    Abilities_Event3 = v
-end)
-
-tap1:AddLine()
-
-tap1:AddButton("Stats Refund [ 50 Candy ]", function()
-    function Event_ReStats_Button()
-        local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
-        Event:InvokeServer("Candies", "Buy", 1, 2)
-    end
-    Event_ReStats_Button()
-end)
-
-tap1:AddButton("Race Reroll [ 100 Candy ]", function()
-    function Event_ReRace_Button()
-        local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
-        Event:InvokeServer("Candies", "Buy", 1, 3)
-    end
-    Event_ReRace_Button()
-end)
-
-tap1:AddSeperator("Meme")
-
-tap1:AddButton("Rick Roll", function()
-    local Music = "1544291808"
-    function Rickroll()
-        local Sound = Instance.new("Sound")
-        Sound.Name = "RickRoll"
-        Sound.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
-        Sound.SoundId = "rbxassetid://" .. Music
-        Sound.Volume = 1.5
-        Sound:Play()
-    end
-    Rickroll()
 end)
 
 local tap2 = Library:AddTab("More Farm")
