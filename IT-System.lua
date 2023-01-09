@@ -1,4 +1,4 @@
-if _G.FastAttack then
+if _G.FastAttack == "Best Mode" then
     --[[
 
   "Not The Best FastAttack"
